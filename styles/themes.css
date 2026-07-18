@@ -1,2 +1,60 @@
 @theme inline {
+  
+--color-background: var(--background);
+--color-foreground: var(--foreground);
+--color-card: var(--card);
+--color-card-foreground: var(--card-foreground);
+--color-popover: var(--popover);
+--color-popover-foreground: var(--popover-foreground);
+--color-primary: var(--primary);
+--color-primary-foreground: var(--primary-foreground);
+--color-secondary: var(--secondary);
+--color-secondary-foreground: var(--secondary-foreground);
+--color-muted: var(--muted);
+--color-muted-foreground: var(--muted-foreground);
+--color-accent: var(--accent);
+--color-accent-foreground: var(--accent-foreground);
+--color-destructive: var(--destructive);
+--color-border: var(--border);
+--color-input: var(--input);
+--color-ring: var(--ring);
+--color-chart-1: var(--chart-1);
+--color-chart-2: var(--chart-2);
+--color-chart-3: var(--chart-3);
+--color-chart-4: var(--chart-4);
+--color-chart-5: var(--chart-5);
+--color-sidebar: var(--sidebar);
+--color-sidebar-foreground: var(--sidebar-foreground);
+--color-sidebar-primary: var(--sidebar-primary);
+--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+--color-sidebar-accent: var(--sidebar-accent);
+--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+--color-sidebar-border: var(--sidebar-border);
+--color-sidebar-ring: var(--sidebar-ring);
+  
+--text-xs: 0.694rem;
+--text-sm: 0.833rem;
+--text-base: 1.000rem;
+--text-lg: 1.200rem;
+--text-xl: 1.440rem;
+--text-2xl: 1.728rem;
+--text-3xl: 2.074rem;
+--text-4xl: 2.488rem;
+--text-5xl: 2.986rem;
+--text-6xl: 3.583rem;
+--text-7xl: 4.300rem;
+--text-8xl: 5.160rem;
+--text-9xl: 6.192rem;
+  
+--font-primary: var(--font-primary);
+--font-secondary: var(--font-secondary);
+--font-heading: var(--font-heading);
+  
+--radius-sm: calc(var(--radius) * 0.6);
+--radius-md: calc(var(--radius) * 0.8);
+--radius-lg: calc(var(--radius) * 1);
+--radius-xl: calc(var(--radius) * 1.4);
+--radius-2xl: calc(var(--radius) * 1.8);
+--radius-3xl: calc(var(--radius) * 2.2);
+--radius-4xl: calc(var(--radius) * 2.6);
 }

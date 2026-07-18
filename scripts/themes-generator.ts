@@ -1,4 +1,5 @@
 import * as fs from "node:fs/promises";
+import * as path from "node:path";
 import themeConfig from "@/configs/theme.json";
 
 const fontBase = themeConfig.typography.fontSize / 16;
@@ -71,15 +72,19 @@ async function genRadiuses(): Promise<string> {
 
     const theme: string = `
 @theme inline {
-${colors}
-${typography}
-${fonts}
-${radiuses}
+  ${colors}
+  ${typography}
+  ${fonts}
+  ${radiuses}
 }
-`;
+  `;
 
-    console.dir({ theme }, { depth: null });
-  } catch {
-  } finally {
+    const outputPath = path.join(process.cwd(), "styles", "themes.css");
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.writeFile(outputPath, theme.trim() + "\n", "utf-8");
+    console.log(`\n[✓] Successfully generated themes in: ${outputPath}`);
+  } catch (error) {
+    console.error("\n[✗] Failed to generate themes:", error);
+    process.exit(1);
   }
 })();
