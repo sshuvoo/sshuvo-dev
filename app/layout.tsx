@@ -1,23 +1,13 @@
-import type { Metadata } from "next";
-import GFonts from "next/font/google";
 import "@/styles/globals.css";
-import theme from "@/configs/theme.json";
-import type { FontLoader } from "@/types/fonts";
-import type { CssVariable } from "next/dist/compiled/@next/font";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 
-const FontPrimary = (GFonts as Record<string, FontLoader<CssVariable>>)[
-  theme.typography.fontFamily.primary
-];
-const FontSecondary = (GFonts as Record<string, FontLoader<CssVariable>>)[
-  theme.typography.fontFamily.secondary
-];
-
-const primaryFont = FontPrimary({
+const primaryFont = Geist({
   variable: "--font-primary",
   subsets: ["latin"],
 });
 
-const secondaryFont = FontSecondary({
+const secondaryFont = Geist_Mono({
   variable: "--font-secondary",
   subsets: ["latin"],
 });
