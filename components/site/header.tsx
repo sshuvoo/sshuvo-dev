@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { Command } from "lucide-react";
 import { sections, site } from "@/lib/site";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
 export function SiteHeader() {
   const { scrollYProgress } = useScroll();
   const reduced = useReducedMotion();
+  const pathname = usePathname();
+  const onHome = pathname === "/";
   const progress = useSpring(scrollYProgress, {
     stiffness: 200,
     damping: 40,
@@ -16,6 +21,7 @@ export function SiteHeader() {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!onHome) return;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -29,7 +35,7 @@ export function SiteHeader() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [onHome]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/75 backdrop-blur-md">
@@ -42,36 +48,39 @@ export function SiteHeader() {
         aria-label="Site"
         className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6"
       >
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           className="font-secondary text-sm font-medium tracking-tight text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
           {site.shortName}
           <span aria-hidden className="text-muted-foreground">
             (t)
           </span>
-        </a>
+        </Link>
         <div className="flex items-center gap-1 sm:gap-2">
           {sections.map(({ id, label }) => (
-            <a
+            <Link
               key={id}
-              href={`#${id}`}
-              aria-current={active === id ? "location" : undefined}
+              href={`/#${id}`}
+              aria-current={onHome && active === id ? "location" : undefined}
               className={`hidden rounded-md px-2.5 py-1.5 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${
-                active === id
+                onHome && active === id
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
-            className="inline-block rounded-md px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:hidden"
+          <button
+            type="button"
+            onClick={() => dispatchEvent(new Event("open-command-palette"))}
+            aria-label="Open command palette"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-3 font-secondary text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
-            Contact
-          </a>
+            <Command className="size-3.5" aria-hidden />
+            <span className="hidden sm:inline">K</span>
+          </button>
           <ThemeToggle />
         </div>
       </nav>

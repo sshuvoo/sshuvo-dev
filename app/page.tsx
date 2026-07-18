@@ -1,16 +1,15 @@
-import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Command } from "lucide-react";
+import { FlowField } from "@/components/canvas/flow-field";
+import { FourierMachine } from "@/components/canvas/fourier-machine";
 import { Harmonograph } from "@/components/canvas/harmonograph";
 import { LissajousLab } from "@/components/canvas/lissajous-lab";
 import { MiniSlate } from "@/components/canvas/mini-slate";
 import { QueueViz } from "@/components/canvas/queue-viz";
 import { Reveal } from "@/components/motion/reveal";
+import { CommandPalette } from "@/components/site/command-palette";
 import { SiteHeader } from "@/components/site/header";
 import { site } from "@/lib/site";
-
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
 
 function ExternalLink({
   href,
@@ -37,6 +36,23 @@ function ExternalLink({
   );
 }
 
+function CaseStudyLink({ slug, children }: { slug: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={`/work/${slug}`}
+      className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+    >
+      <span className="underline decoration-border underline-offset-4 transition-colors group-hover:decoration-foreground">
+        {children}
+      </span>
+      <ArrowRight
+        aria-hidden
+        className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+      />
+    </Link>
+  );
+}
+
 function SectionHeading({
   index,
   id,
@@ -48,15 +64,10 @@ function SectionHeading({
 }) {
   return (
     <h2 id={id} className="flex items-baseline gap-3 text-2xl sm:text-3xl">
-      <span
-        aria-hidden
-        className="font-secondary text-sm font-normal text-muted-foreground"
-      >
+      <span aria-hidden className="font-secondary text-sm font-normal text-muted-foreground">
         {index}
       </span>
-      <span className="font-heading font-semibold tracking-tight">
-        {children}
-      </span>
+      <span className="font-heading font-semibold tracking-tight">{children}</span>
     </h2>
   );
 }
@@ -65,17 +76,18 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
+      <CommandPalette />
       <main id="main" className="flex-1">
-        {/* ————— Hero: the identity is a plotted equation ————— */}
+        {/* ————— Hero: the Fourier drawing machine ————— */}
         <section
           id="top"
           aria-label="Introduction"
-          className="relative mx-auto flex min-h-svh max-w-5xl flex-col justify-center px-4 pt-14 sm:px-6"
+          className="relative mx-auto flex min-h-svh max-w-5xl flex-col justify-center px-4 pt-20 pb-10 sm:px-6"
         >
-          <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid items-center gap-10 md:grid-cols-[1fr_1fr]">
             <div>
               <p className="font-secondary text-sm text-muted-foreground">
-                x(t) = Σ Aᵢ sin(fᵢt + φᵢ) e^(−dᵢt)
+                f(t) = Σ cₙ · e^(2πint)
               </p>
               <h1 className="mt-4 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
                 Saffaullah Shuvo
@@ -84,12 +96,14 @@ export default function Home() {
                 Frontend engineer who thinks in systems and draws in code.
               </p>
               <p className="mt-6 max-w-prose text-muted-foreground">
-                I studied applied mathematics, then spent three years building
-                what equations become on a screen: a CMS platform, a canvas
-                drawing engine, an open-source data-structures library. React,
-                Next.js, and TypeScript are the tools — the curve on the right
-                is the point. It&apos;s a damped pendulum, plotted live. Click
-                it.
+                The machine on the right is running a Fourier transform, live.
+                Right now it&apos;s redrawing a star with rotating circles —
+                but it would much rather redraw <em>your</em> drawing.{" "}
+                <strong className="font-medium text-foreground">
+                  Sketch any shape on it.
+                </strong>{" "}
+                Then drag the slider and watch your sketch dissolve into
+                mathematics and come back.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <a
@@ -101,8 +115,12 @@ export default function Home() {
                 <ExternalLink href={site.github}>GitHub</ExternalLink>
                 <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
               </div>
+              <p className="mt-10 hidden items-center gap-2 font-secondary text-xs text-muted-foreground sm:flex">
+                <Command className="size-3.5" aria-hidden /> Press ⌘K — this
+                site has a command palette, because of course it does.
+              </p>
             </div>
-            <Harmonograph className="mx-auto aspect-square w-full max-w-105 text-foreground" />
+            <FourierMachine className="mx-auto w-full max-w-105" />
           </div>
         </section>
 
@@ -116,14 +134,15 @@ export default function Home() {
               Work that runs, not screenshots
             </SectionHeading>
             <p className="mt-4 max-w-prose text-muted-foreground">
-              Every project below is either live in this page or one click from
-              its real deployment. If it can&apos;t be touched, it isn&apos;t
-              here.
+              Three projects, three formats: a product I engineer at work, a
+              rendering engine you can scribble on, and a library you can
+              operate. Each has a full case study — the story, the hard parts,
+              the takeaway.
             </p>
           </Reveal>
 
           <div className="mt-12 grid gap-6">
-            {/* Sitepins — the professional centerpiece */}
+            {/* Sitepins */}
             <Reveal>
               <article className="rounded-xl border border-border p-6 sm:p-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -135,40 +154,46 @@ export default function Home() {
                   </p>
                 </div>
                 <p className="mt-4 max-w-prose text-muted-foreground">
-                  A content management system used by developers and businesses
-                  globally. I own features end-to-end — authentication systems,
-                  RESTful APIs, backend services, and the frontend
-                  architecture. The same hands that write the React components
-                  design the API they call.
+                  A content platform used by developers and businesses
+                  globally. I own vertical slices end-to-end: the
+                  authentication and RBAC system, the RESTful backend
+                  services, and the frontend architecture that consumes them.
+                  One head holding both sides of the contract — that&apos;s
+                  the feature.
                 </p>
                 <ul className="mt-6 grid gap-3 text-sm text-muted-foreground sm:grid-cols-3">
                   <li className="rounded-lg bg-muted/60 p-4">
                     <strong className="block font-secondary text-xs font-medium tracking-wide text-foreground uppercase">
                       Auth
                     </strong>
-                    Authentication &amp; RBAC — roles and permissions from
-                    session layer to UI guards.
+                    Sessions and RBAC — roles and permissions enforced at the
+                    boundary, mirrored in the UI.
                   </li>
                   <li className="rounded-lg bg-muted/60 p-4">
                     <strong className="block font-secondary text-xs font-medium tracking-wide text-foreground uppercase">
                       API
                     </strong>
-                    RESTful backend services designed alongside the interfaces
-                    that consume them.
+                    RESTful services designed alongside the interfaces that
+                    consume them.
                   </li>
                   <li className="rounded-lg bg-muted/60 p-4">
                     <strong className="block font-secondary text-xs font-medium tracking-wide text-foreground uppercase">
                       Frontend
                     </strong>
-                    Component architecture, performance work — memoization,
-                    lazy loading, image optimization.
+                    Component architecture and performance as a habit:
+                    memoization, lazy loading, image budgets.
                   </li>
                 </ul>
+                <p className="mt-6">
+                  <CaseStudyLink slug="sitepins">
+                    Read the case study
+                  </CaseStudyLink>
+                </p>
               </article>
             </Reveal>
 
             <div className="grid gap-6 md:grid-cols-2">
-              {/* Slate — live mini drawing board */}
+              {/* Slate */}
               <Reveal>
                 <article className="flex h-full flex-col rounded-xl border border-border p-6 sm:p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -180,43 +205,39 @@ export default function Home() {
                     </p>
                   </div>
                   <p className="mt-3 text-sm text-muted-foreground">
-                    A drawing app built from scratch — rendering pipeline,
-                    pointer events, performance under continuous input. This
-                    box is a working miniature of it:
+                    A drawing engine built from first principles — pointer
+                    scheduling, DPR correctness, frame budgets. This box is a
+                    working miniature:
                   </p>
                   <div className="mt-4 min-h-44 flex-1 rounded-lg border border-dashed border-border">
                     <MiniSlate />
                   </div>
-                  <p className="mt-4 text-sm">
-                    <ExternalLink href={site.slateUrl}>
-                      Open the full app
-                    </ExternalLink>
+                  <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                    <CaseStudyLink slug="slate">Case study</CaseStudyLink>
+                    <ExternalLink href={site.slateUrl}>Full app</ExternalLink>
                   </p>
                 </article>
               </Reveal>
 
-              {/* stl-kit — live priority queue */}
+              {/* stl-kit */}
               <Reveal delay={0.08}>
                 <article className="flex h-full flex-col rounded-xl border border-border p-6 sm:p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-heading text-xl font-semibold">
-                      stl-kit
-                    </h3>
+                    <h3 className="font-heading text-xl font-semibold">stl-kit</h3>
                     <p className="font-secondary text-xs text-muted-foreground">
                       open source · npm
                     </p>
                   </div>
                   <p className="mt-3 text-sm text-muted-foreground">
-                    STL-style typed collections for TypeScript — linked lists,
-                    priority queues. Below, a real max-heap doing its job:
+                    STL-style typed collections for TypeScript. Below, a real
+                    max-heap doing its job — push and pop it:
                   </p>
                   <div className="mt-4 min-h-44 flex-1 rounded-lg border border-dashed border-border p-4">
                     <QueueViz />
                   </div>
-                  <p className="mt-4 text-sm">
-                    <ExternalLink href={site.stlKitUrl}>
-                      View on npm
-                    </ExternalLink>
+                  <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                    <CaseStudyLink slug="stl-kit">Case study</CaseStudyLink>
+                    <ExternalLink href={site.stlKitUrl}>npm</ExternalLink>
                   </p>
                 </article>
               </Reveal>
@@ -241,91 +262,136 @@ export default function Home() {
                   think, if the state is designed first.)
                 </p>
                 <p className="mt-4 text-sm">
-                  <ExternalLink href={site.webOsUrl}>
-                    It still runs
-                  </ExternalLink>
+                  <ExternalLink href={site.webOsUrl}>It still runs</ExternalLink>
                 </p>
               </article>
             </Reveal>
           </div>
         </section>
 
-        {/* ————— Experience ————— */}
-        <section
-          aria-labelledby="experience"
-          className="border-y border-border bg-muted/30"
-        >
+        {/* ————— The Lab ————— */}
+        <section aria-labelledby="lab" className="border-y border-border bg-muted/30">
           <div className="mx-auto max-w-5xl scroll-mt-20 px-4 py-24 sm:px-6">
             <Reveal>
-              <SectionHeading index="02" id="experience">
-                Three years, three altitudes
+              <SectionHeading index="02" id="lab">
+                The Lab
               </SectionHeading>
+              <p className="mt-4 max-w-prose text-muted-foreground">
+                I have a B.Sc. in Applied Mathematics, and this is where it
+                leaks out. Everything below is hand-rolled Canvas or SVG — no
+                graphics library, no shader magic, just equations and a frame
+                loop. Touch everything.
+              </p>
             </Reveal>
-            <ol className="mt-12 grid gap-0">
-              {[
-                {
-                  period: "2025 — present",
-                  title: "Frontend Engineer · Themefisher",
-                  body: "Product engineering across Themefisher, GetHugoThemes, Zeon Studio, and Sitepins — React, Next.js, TypeScript, Astro. Core engineer on Sitepins CMS; component libraries shipped in premium templates used globally.",
-                },
-                {
-                  period: "2024 — 2025",
-                  title: "Full-Stack Developer & Team Lead · Brand & Visual Agency",
-                  body: "Led a small team; set the standards for code review, Git workflow, and component architecture. Translated design direction into MERN + TypeScript delivery.",
-                },
-                {
-                  period: "2023 — 2024",
-                  title: "Full-Stack Developer · Freelance",
-                  body: "Everything, alone: architecture, build, client communication, deployment. The year that taught me what 'owning delivery' actually costs.",
-                },
-              ].map((job, i) => (
-                <Reveal key={job.period} delay={i * 0.06}>
-                  <li className="grid gap-2 border-b border-border py-8 first:pt-2 last:border-b-0 sm:grid-cols-[10rem_1fr] sm:gap-8">
-                    <p className="font-secondary text-sm text-muted-foreground">
-                      {job.period}
+
+            <div className="mt-12 grid gap-6">
+              <Reveal>
+                <article className="rounded-xl border border-border bg-background p-6 sm:p-8">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="font-heading text-lg font-semibold">Ink field</h3>
+                    <p className="font-secondary text-xs text-muted-foreground">
+                      ~1,400 particles · sine-field advection
                     </p>
-                    <div>
-                      <h3 className="text-lg font-semibold">{job.title}</h3>
-                      <p className="mt-2 max-w-prose text-sm text-muted-foreground">
-                        {job.body}
+                  </div>
+                  <p className="mt-2 max-w-prose text-sm text-muted-foreground">
+                    A vector field pushing ink through layered sine noise. Move
+                    your pointer through it — you&apos;re a vortex.
+                  </p>
+                  <FlowField className="mt-4 h-64 w-full rounded-lg text-foreground sm:h-80" />
+                </article>
+              </Reveal>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <Reveal>
+                  <article className="flex h-full flex-col rounded-xl border border-border bg-background p-6 sm:p-8">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="font-heading text-lg font-semibold">
+                        Lissajous lab
+                      </h3>
+                      <p className="font-secondary text-xs text-muted-foreground">
+                        SVG · recomputed per input
                       </p>
                     </div>
-                  </li>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Two perpendicular oscillators; the frequency ratio decides
+                      whether the figure ever closes.
+                    </p>
+                    <div className="mt-4 flex-1">
+                      <LissajousLab />
+                    </div>
+                  </article>
                 </Reveal>
-              ))}
-            </ol>
+
+                <Reveal delay={0.08}>
+                  <article className="flex h-full flex-col rounded-xl border border-border bg-background p-6 sm:p-8">
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <h3 className="font-heading text-lg font-semibold">
+                        Harmonograph
+                      </h3>
+                      <p className="font-secondary text-xs text-muted-foreground">
+                        damped pendulums · click to redraw
+                      </p>
+                    </div>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      x(t) = Σ A·sin(ft + φ)·e^(−dt) — a Victorian drawing
+                      machine, resurrected in a frame loop. Every figure is
+                      one-of-a-kind.
+                    </p>
+                    <Harmonograph className="mt-4 aspect-square w-full flex-1 text-foreground" />
+                  </article>
+                </Reveal>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* ————— Mathematics ————— */}
+        {/* ————— Experience ————— */}
         <section
-          aria-labelledby="mathematics"
+          aria-labelledby="experience"
           className="mx-auto max-w-5xl scroll-mt-20 px-4 py-24 sm:px-6"
         >
           <Reveal>
-            <SectionHeading index="03" id="mathematics">
-              The mathematics is not a metaphor
+            <SectionHeading index="03" id="experience">
+              Three years, three altitudes
             </SectionHeading>
-            <p className="mt-4 max-w-prose text-muted-foreground">
-              B.Sc. in Applied Mathematics, University of Rajshahi. It shows up
-              as an instinct for invariants — in rendering code, in state
-              design, in why an animation feels right. These are Lissajous
-              curves; change the frequency ratio and watch the figure close.
-            </p>
           </Reveal>
-          <Reveal delay={0.1}>
-            <div className="mt-10 rounded-xl border border-border p-6 sm:p-8">
-              <LissajousLab />
-            </div>
-          </Reveal>
+          <ol className="mt-12 grid gap-0">
+            {[
+              {
+                period: "2025 — present",
+                title: "Frontend Engineer · Themefisher",
+                body: "Product engineering across Themefisher, GetHugoThemes, Zeon Studio, and Sitepins — React, Next.js, TypeScript, Astro. Core engineer on Sitepins CMS; component libraries shipped in premium templates used globally.",
+              },
+              {
+                period: "2024 — 2025",
+                title: "Full-Stack Developer & Team Lead · Brand & Visual Agency",
+                body: "Led a small team; set the standards for code review, Git workflow, and component architecture. Translated design direction into MERN + TypeScript delivery.",
+              },
+              {
+                period: "2023 — 2024",
+                title: "Full-Stack Developer · Freelance",
+                body: "Everything, alone: architecture, build, client communication, deployment. The year that taught me what 'owning delivery' actually costs.",
+              },
+            ].map((job, i) => (
+              <Reveal key={job.period} delay={i * 0.06}>
+                <li className="grid gap-2 border-b border-border py-8 first:pt-2 last:border-b-0 sm:grid-cols-[10rem_1fr] sm:gap-8">
+                  <p className="font-secondary text-sm text-muted-foreground">
+                    {job.period}
+                  </p>
+                  <div>
+                    <h3 className="text-lg font-semibold">{job.title}</h3>
+                    <p className="mt-2 max-w-prose text-sm text-muted-foreground">
+                      {job.body}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
         </section>
 
         {/* ————— Contact ————— */}
-        <footer
-          id="contact"
-          aria-label="Contact"
-          className="scroll-mt-20 border-t border-border"
-        >
+        <footer id="contact" aria-label="Contact" className="scroll-mt-20 border-t border-border">
           <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6">
             <Reveal>
               <h2 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
@@ -333,8 +399,8 @@ export default function Home() {
               </h2>
               <p className="mt-4 max-w-prose text-muted-foreground">
                 Interesting frontend problems, canvas-heavy interfaces,
-                open-source collaboration — or just to say the pendulum drew a
-                good one today.
+                open-source collaboration — or just to tell me what you drew on
+                the Fourier machine.
               </p>
               <p className="mt-8">
                 <a
