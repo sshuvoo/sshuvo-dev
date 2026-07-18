@@ -1,14 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import GFonts from "next/font/google";
 import "@/styles/globals.css";
+import theme from "@/configs/theme.json";
+import type { FontLoader } from "@/types/fonts";
+import type { CssVariable } from "next/dist/compiled/@next/font";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const FontPrimary = (GFonts as Record<string, FontLoader<CssVariable>>)[
+  theme.typography.fontFamily.primary
+];
+const FontSecondary = (GFonts as Record<string, FontLoader<CssVariable>>)[
+  theme.typography.fontFamily.secondary
+];
+
+const primaryFont = FontPrimary({
+  variable: "--font-primary",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const secondaryFont = FontSecondary({
+  variable: "--font-secondary",
   subsets: ["latin"],
 });
 
@@ -25,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${primaryFont.variable} ${secondaryFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

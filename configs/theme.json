@@ -66,5 +66,16 @@
       "sidebar-border": "oklch(1 0 0 / 10%)",
       "sidebar-ring": "oklch(0.556 0 0)"
     }
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": "Geist",
+      "secondary": "Geist_Mono"
+    },
+    "fontSize": 16,
+    "scale": 1.2,
+    "lineHeight": 1.5,
+    "fontWeight": [300, 400, 500, 600, 700, 800, 900],
+    "letterSpacing": 0
   }
 }
