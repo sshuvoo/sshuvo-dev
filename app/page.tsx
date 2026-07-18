@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="flex justify-center flex-col items-center min-h-screen">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       <h1>This is a h1 heading</h1>
       <h2>This is a h2 heading</h2>
       <h3>This is a h3 heading</h3>
@@ -9,5 +9,5 @@ export default function Home() {
       <h6>This is a h6 heading</h6>
       <p>This is a paragraph</p>
     </div>
-  );
+  )
 }
