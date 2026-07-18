@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude api keys
+.claude/settings.local.json
+
+# agentic instruction
+SKILL.md
+cv.md
