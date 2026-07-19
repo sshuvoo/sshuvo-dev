@@ -3,6 +3,8 @@ import '@/styles/globals.css'
 import type { Metadata, Viewport } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Geist_Mono } from 'next/font/google'
+import { SiteHeader } from '@/components/site/header'
+import { CommandPalette } from '@/components/site/command-palette'
 
 const geist_mono = Geist_Mono({
   variable: '--font-primary',
@@ -144,6 +146,8 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <SiteHeader />
+          <CommandPalette />
           {children}
         </ThemeProvider>
         <script

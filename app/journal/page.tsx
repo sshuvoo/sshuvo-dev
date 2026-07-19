@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { SiteHeader } from "@/components/site/header";
-import { CommandPalette } from "@/components/site/command-palette";
 import { Reveal } from "@/components/motion/reveal";
 import { formatJournalDate, getAllJournals } from "@/lib/journals";
 import { site } from "@/lib/site";
@@ -26,8 +24,6 @@ export default async function JournalPage() {
 
   return (
     <>
-      <SiteHeader />
-      <CommandPalette />
       <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6">
         <Reveal>
           <header>

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { SiteHeader } from "@/components/site/header";
-import { CommandPalette } from "@/components/site/command-palette";
 import { Reveal } from "@/components/motion/reveal";
 import { AiActions } from "@/components/journal/ai-actions";
 import { TableOfContents } from "@/components/journal/table-of-contents";
@@ -77,8 +75,6 @@ export default async function JournalEntryPage({
 
   return (
     <>
-      <SiteHeader />
-      <CommandPalette />
       <main
         id="main"
         className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6 xl:max-w-6xl"

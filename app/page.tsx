@@ -4,8 +4,6 @@ import { FlowField } from '@/components/canvas/flow-field'
 import { MiniSlate } from '@/components/canvas/mini-slate'
 import { QueueViz } from '@/components/canvas/queue-viz'
 import { Reveal } from '@/components/motion/reveal'
-import { CommandPalette } from '@/components/site/command-palette'
-import { SiteHeader } from '@/components/site/header'
 import { site } from '@/lib/site'
 import { CareerTimeline } from '@/components/site/career-timeline'
 
@@ -87,9 +85,6 @@ function SectionHeading({
 export default function Page() {
   return (
     <>
-      <CommandPalette />
-      <SiteHeader />
-
       <main
         id="main"
         className="bg-background text-foreground flex-1 scroll-smooth pb-16"
@@ -101,10 +96,10 @@ export default function Page() {
         >
           <div className="max-w-3xl">
             <span className="font-secondary text-muted-foreground text-xs font-bold tracking-widest uppercase">
-              f(t) = Σ c_n * e^(2πint)
+              Saffaullah Shuvo
             </span>
             <h1 className="font-heading mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
-              Saffaullah Shuvo
+              AI First Software Engineer
             </h1>
             <p className="text-muted-foreground mt-3 text-lg sm:text-xl">
               {site.tagline}

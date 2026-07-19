@@ -4,8 +4,6 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { caseStudyContent } from "@/lib/case-studies";
 import { caseStudies, site, type CaseStudySlug } from "@/lib/site";
-import { SiteHeader } from "@/components/site/header";
-import { CommandPalette } from "@/components/site/command-palette";
 import { Reveal } from "@/components/motion/reveal";
 
 export function generateStaticParams() {
@@ -57,8 +55,6 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      <SiteHeader />
-      <CommandPalette />
       <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6">
         <Reveal>
           <Link
