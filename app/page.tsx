@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ExternalLink as ExternalLinkIcon } from 'lucide-react'
 import { FlowField } from '@/components/canvas/flow-field'
 import { MiniSlate } from '@/components/canvas/mini-slate'
 import { QueueViz } from '@/components/canvas/queue-viz'
@@ -286,8 +286,8 @@ export default function Page() {
               The Inbox is Open
             </h2>
             <p className="text-muted-foreground mt-4 max-w-prose text-sm leading-relaxed">
-              If you have challenging vector math problems, component rendering
-              bottlenecks, or just want to chat about the Fourier transform.
+              If you have a challenging project, need help with system architecture,
+              or want to collaborate on AI-first products — let&apos;s talk.
             </p>
             <p className="text-foreground mt-6 font-mono text-lg font-bold">
               <a href={`mailto:${site.email}`} className="hover:underline">
@@ -303,16 +303,18 @@ export default function Page() {
                   href={site.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground"
+                  className="inline-flex items-center gap-1.5 hover:text-foreground"
                 >
+                  <ExternalLinkIcon className="size-3.5" />
                   GitHub
                 </a>
                 <a
                   href={site.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground"
+                  className="inline-flex items-center gap-1.5 hover:text-foreground"
                 >
+                  <ExternalLinkIcon className="size-3.5" />
                   LinkedIn
                 </a>
               </div>

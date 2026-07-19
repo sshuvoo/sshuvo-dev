@@ -169,13 +169,17 @@ export function CareerTimeline() {
                         : "fill-card stroke-border stroke-2 group-hover:fill-muted/40"
                     }`}
                   />
-                  <Briefcase
+                  <foreignObject
                     x={node.x - 7}
                     y={node.y - 7}
-                    className={`size-3.5 transition-colors duration-300 ${
+                    width="14"
+                    height="14"
+                    className={`transition-colors duration-300 ${
                       isActive ? "text-primary-foreground" : "text-muted-foreground"
                     }`}
-                  />
+                  >
+                    <Briefcase className="size-3.5" />
+                  </foreignObject>
                   {/* Node label */}
                   <text
                     x={node.x}
