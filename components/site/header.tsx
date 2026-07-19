@@ -84,15 +84,15 @@ export function SiteHeader() {
             Journal
           </Link>
           <Link
-            href="/leetcode"
-            aria-current={pathname.startsWith("/leetcode") ? "page" : undefined}
+            href="/problem-solving"
+            aria-current={pathname.startsWith("/problem-solving") ? "page" : undefined}
             className={`hidden rounded-full px-2.5 py-1.5 text-[10px] font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${
-              pathname.startsWith("/leetcode")
+              pathname.startsWith("/problem-solving")
                 ? "bg-muted text-foreground"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
-            LeetCode
+            Problem Solving
           </Link>
           <button
             type="button"

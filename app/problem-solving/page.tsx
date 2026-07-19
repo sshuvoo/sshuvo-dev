@@ -19,7 +19,7 @@ import { CommandPalette } from "@/components/site/command-palette";
 import { Reveal } from "@/components/motion/reveal";
 import { leetcodeData } from "@/lib/leetcode";
 
-export default function LeetCodePage() {
+export default function ProblemSolvingPage() {
   const {
     username,
     name,

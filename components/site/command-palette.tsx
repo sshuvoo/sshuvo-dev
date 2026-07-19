@@ -77,12 +77,12 @@ export function CommandPalette() {
         },
       },
       {
-        id: "leetcode",
-        label: "View LeetCode Profile",
+        id: "problem-solving",
+        label: "Problem Solving & DSA",
         icon: <Trophy className="size-4" aria-hidden />,
         keywords: "leetcode problem solving algorithms data structures solutions dsa progress statistics",
         run: () => {
-          router.push("/leetcode");
+          router.push("/problem-solving");
           close();
         },
       },
