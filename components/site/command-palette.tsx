@@ -12,6 +12,7 @@ import {
   Globe,
   Mail,
   MoonStar,
+  NotebookPen,
   Search,
   UserRound,
 } from "lucide-react";
@@ -61,6 +62,16 @@ export function CommandPalette() {
         keywords: "lab experiments math playground",
         run: () => {
           router.push("/#lab");
+          close();
+        },
+      },
+      {
+        id: "journal",
+        label: "Read the Journal",
+        icon: <NotebookPen className="size-4" aria-hidden />,
+        keywords: "journal blog writing notes articles thoughts",
+        run: () => {
+          router.push("/journal");
           close();
         },
       },

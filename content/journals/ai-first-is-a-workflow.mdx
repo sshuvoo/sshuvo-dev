@@ -1,0 +1,67 @@
+export const meta = {
+  title: "AI-first is a workflow, not a feature",
+  description:
+    "Everyone is bolting a chatbot onto their product and calling it AI-first. The real shift is in how software gets built — and what it does to code review, testing, and taste.",
+  date: "2026-07-12",
+  tags: ["AI", "Workflow", "Opinion"],
+};
+
+Every second landing page this year says "AI-powered." Most of them mean a
+textarea that forwards to a model API. That is a feature — and often a good
+one — but it is not what AI-first means to me as an engineer.
+
+AI-first is a workflow. It changes how the software gets made, before it
+changes what the software does.
+
+## The loop has inverted
+
+The old loop: think, type, run, debug. The new loop: specify, review, steer.
+I spend less time producing code and far more time reading it — auditing a
+diff an agent produced against an intent I wrote three minutes ago.
+
+That inversion has consequences nobody puts on the landing page:
+
+- **Review is the bottleneck now.** Generating a 400-line change takes a
+  minute. Understanding it still takes as long as it ever did. Teams that
+  merge on vibes will discover this the expensive way.
+- **Tests stopped being optional.** When a human writes code, the tests
+  verify the code. When an agent writes code, the tests _are_ the spec. A
+  weak suite means the agent optimizes for "compiles" instead of "correct."
+- **Taste compounds.** The model happily produces five workable designs. The
+  engineer's job is knowing which one you will not regret in six months.
+
+<PullQuote cite="a note I keep pinned above my editor">
+  The model writes the code. You are still responsible for the system.
+</PullQuote>
+
+## What this looks like in practice
+
+On my own projects, the workflow has settled into three habits:
+
+1. **Write the constraint, not the code.** A precise paragraph about invariants
+   and edge cases beats a vague prompt plus four correction rounds.
+2. **Keep the diff smaller than your attention.** If I cannot hold the whole
+   change in my head, I split the task — not because the model can't do more,
+   but because I can't review more.
+3. **Automate the boring verification.** Typecheck, lint, tests, build — every
+   agent turn ends by running them. Machines checking machines, so my review
+   time goes to design instead of typos.
+
+<Callout type="tip" title="A cheap habit that pays">
+  Ask the agent to explain the riskiest line of its own diff before you read
+  it. Wrong explanations are the fastest bug detector I know.
+</Callout>
+
+## The uncomfortable part
+
+Some of my hard-won skills depreciated. Memorizing an API surface is worth
+little when the model knows every API surface. What appreciated instead:
+systems thinking, data modeling, knowing what "correct" even means for a
+given feature. The mathematics degree turned out to be a better long-term
+asset than the jQuery years.
+
+<Takeaway>
+  AI-first is not a chatbot in the corner of the screen. It is accepting that
+  code generation is cheap, judgment is expensive, and building your whole
+  workflow around the second fact.
+</Takeaway>

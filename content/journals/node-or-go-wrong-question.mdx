@@ -1,0 +1,65 @@
+export const meta = {
+  title: "Node or Go? Wrong question — here's the one I ask",
+  description:
+    "I write both. The decision that actually matters isn't syntax or benchmarks — it's the failure model your service needs. A field guide from running JavaScript and Go in production.",
+  date: "2026-06-10",
+  tags: ["Node.js", "Go", "Backend", "Opinion"],
+};
+
+"Node or Go" threads are the tabs-versus-spaces of backend engineering:
+maximum heat, minimum decision value. I write both — Node because the
+JavaScript ecosystem pays my bills, Go because some problems deserve it —
+and the benchmark screenshots in those threads have almost never predicted
+which one a project of mine actually needed.
+
+The question I ask instead: **what is this service's failure model?**
+
+## What each runtime is actually good at
+
+Node's superpower is not speed; it is _proximity_. The API lives in the same
+language as the frontend, shares types with the frontend, and is maintained
+by the same people who build the frontend. For a product team shipping
+features weekly, that proximity beats a 3× throughput number that your
+traffic will never reach anyway.
+
+Go's superpower is not goroutines; it is _boringness under load_. Static
+binary, flat memory profile, no event loop to starve, no dependency tree
+with ten thousand transitive packages. When a Go service misbehaves, the
+list of suspects is short.
+
+<PullQuote>
+  Choose Node for iteration speed with your team. Choose Go for predictability
+  under stress. Everything else is a benchmark screenshot.
+</PullQuote>
+
+## The heuristics I actually use
+
+1. **Is it a BFF or product API?** Node. Type-sharing with a TypeScript
+   frontend removes an entire class of contract bugs, and hiring is easier.
+2. **Is it CPU-bound or long-running?** Go. The event loop is the wrong tool
+   for image processing, and a worker's memory profile matters at 3 a.m.
+3. **Does it need to run for months untouched?** Go. `go build` from a year
+   ago still compiles. A year-old `node_modules` is an archaeology dig.
+4. **Is the domain logic shared with the UI?** Node — validation schemas,
+   pricing rules, and permission checks written once are worth a lot.
+
+<Callout type="note" title="The part both camps skip">
+  Most backend latency is neither Node's nor Go's — it's the database. A
+  missing index costs you 200ms; the runtime choice costs you 2ms. Profile
+  the query plan before you rewrite the service.
+</Callout>
+
+## Concurrency: honest comparison
+
+Node's async/await makes the easy 90% of concurrency invisible — and the
+hard 10% (backpressure, CPU starvation) nearly impossible to see coming.
+Go's goroutines and channels make you think about the hard 10% up front —
+and make you type more for the easy 90%. Neither is free; pick which bill
+you'd rather pay.
+
+<Takeaway>
+  Stop asking which runtime is faster. Ask what the failure model is: if
+  failure looks like "we shipped the wrong feature slowly," take Node's
+  proximity. If it looks like "the worker died at 3 a.m.," take Go's
+  boringness. Both are correct answers to different questions.
+</Takeaway>

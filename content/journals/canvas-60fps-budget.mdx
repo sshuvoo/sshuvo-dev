@@ -1,0 +1,70 @@
+export const meta = {
+  title: "60fps is a budget, not a boast",
+  description:
+    "Everything I know about canvas performance came from a drawing app that stuttered. Frame budgets, pointer events, and the math-major habit that saved it — notes from building Slate.",
+  date: "2026-05-04",
+  tags: ["Canvas", "Performance", "Graphics", "TypeScript"],
+};
+
+My drawing app Slate had a stutter. Not a dramatic one — a tiny hitch when a
+fast stroke crossed the canvas, the kind you feel before you can measure it.
+Chasing that hitch taught me more about browser performance than five years
+of React work, because canvas gives you nothing for free: no virtual DOM, no
+scheduler, no framework to blame. Just you and 16.6 milliseconds.
+
+## Treat the frame as a budget
+
+At 60fps you get 16.6ms per frame — and the browser spends some of it on
+input processing, style, and compositing before your code runs a line. Call
+it 10ms of real budget. Every feature is a line item against it:
+
+| Line item | Cost I measured | Fix |
+| --- | --- | --- |
+| Full-canvas redraw per event | ~11ms | Redraw the dirty rectangle only |
+| Shadow blur on every stroke | ~4ms | Pre-render to an offscreen layer |
+| getBoundingClientRect per move | ~0.4ms each | Cache it; invalidate on resize |
+| Allocating points as objects | GC pauses | Flat Float32Array, reused |
+
+The numbers are from my hardware and yours will differ — the habit of
+_having_ numbers is the point. You cannot negotiate with a budget you have
+never itemized.
+
+## Pointer events lie about time
+
+The subtle one: input events don't arrive when the input happened. A fast
+stylus stroke generates events faster than frames, and the browser coalesces
+them — so drawing one segment per event, at event time, gives you chicken
+scratch on exactly the strokes where smoothness matters most.
+
+The fix is a pipeline, not a handler:
+
+1. On `pointermove`, drain `getCoalescedEvents()` into a flat buffer — no
+   drawing, no allocation, just numbers in an array.
+2. In one `requestAnimationFrame` loop, consume the buffer and render.
+3. Smooth with the math, not the framerate — fit the raw points with
+   Catmull-Rom segments so curvature survives even when events are sparse.
+
+<Callout type="tip" title="The math-major habit">
+  A parametric curve through n points is cheaper than n tiny line segments
+  and looks better at every zoom level. Most "performance" problems in
+  graphics code are actually sampling problems wearing a costume.
+</Callout>
+
+## What the profiler taught me about React apps
+
+The irony: shipping a canvas engine made me faster at ordinary web work.
+Once you've felt a 16ms budget, you recognize the same physics in a React
+app — a layout thrash is a blown frame, a chatty effect is an unbatched
+event stream, a giant memo is a full-canvas redraw. The DOM was hiding the
+frame loop from me; canvas made me look at it.
+
+<PullQuote>
+  Frameworks can hide the frame loop, but they cannot repeal it.
+</PullQuote>
+
+<Takeaway>
+  Treat 60fps as an itemized budget: measure every line item, drain inputs
+  into buffers, render once per frame, and let mathematics do the smoothing.
+  The discipline transfers to every UI you will ever build — canvas just
+  refuses to let you skip the lesson.
+</Takeaway>

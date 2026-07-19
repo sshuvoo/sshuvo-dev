@@ -1,0 +1,67 @@
+export const meta = {
+  title: "Server Components changed where I put my brain",
+  description:
+    "Two years into React Server Components, the mental model finally clicked: it's not about performance, it's about deciding where data becomes UI. Notes from shipping a CMS on them.",
+  date: "2026-06-28",
+  tags: ["React", "Next.js", "Architecture"],
+};
+
+I resisted React Server Components for a while. The pitch sounded like a
+performance hack — less JavaScript on the wire — and my apps were not slow
+enough to justify relearning data flow. Shipping a CMS on the App Router
+changed my mind, but not for the advertised reason.
+
+## The real question RSC asks
+
+Every screen in a data-driven app answers the same question: _where does data
+become UI?_ For a decade the answer was "in the browser" — fetch JSON, hold
+state, render. RSC makes that a per-component decision instead of an
+architecture-wide default.
+
+<Stack items="React 19, Next.js App Router, Server Components, Suspense" />
+
+The division of labor I've landed on:
+
+| Concern | Where it lives now |
+| --- | --- |
+| Reading data | Server component, async, no state |
+| Mutating data | Server action, validated at the boundary |
+| Interactivity | Small client islands at the leaves |
+| Secrets and queries | Never leave the server |
+
+The surprise was how much of a real product falls in the first row. In the
+CMS, entire admin screens turned out to be "read data, render tree" with two
+buttons of interactivity at the bottom. Under the old model, all of it would
+have been client state, loading spinners, and cache invalidation.
+
+## Where it hurts
+
+Honesty section. Three things still cost me time:
+
+- **The serialization boundary is invisible until it isn't.** Passing a Date
+  or a function across the client boundary fails at runtime, not in the
+  editor. I now treat boundary props like an API contract.
+- **Caching is powerful and opaque.** When a page is stale, the answer lives
+  in one of four caching layers. Read the framework docs for _your exact
+  version_ — the semantics genuinely change between majors.
+- **The ecosystem lag is real.** Any library that assumes `useEffect` on
+  mount needs a client wrapper. Fewer every month, but budget for it.
+
+<Callout type="warning" title="The trap I fell into">
+  Do not sprinkle "use client" until an error goes away. Every directive
+  hoists a whole subtree to the client bundle. Push it down to the smallest
+  leaf that actually needs an event handler.
+</Callout>
+
+## The habit that transfers
+
+The durable skill is drawing the boundary consciously: this part of the tree
+is data becoming HTML, that part is a stateful island. Even if RSC loses to
+some future model, thinking in boundaries — server/client, pure/stateful,
+cacheable/personal — is just good systems design wearing a React costume.
+
+<Takeaway>
+  Server Components aren't a performance feature. They're a decision-forcing
+  function: for every component, you now choose where data becomes UI — and
+  most of the time, the honest answer is "on the server."
+</Takeaway>

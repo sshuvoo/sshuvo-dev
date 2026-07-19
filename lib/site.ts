@@ -8,7 +8,6 @@ export const site = siteConfig;
 
 export const sections = [
   { id: "work", label: "Work" },
-  { id: "lab", label: "Lab" },
   { id: "experience", label: "Experience" },
   { id: "contact", label: "Contact" },
 ] as const;

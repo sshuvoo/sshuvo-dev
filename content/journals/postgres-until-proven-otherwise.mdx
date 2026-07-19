@@ -1,0 +1,70 @@
+export const meta = {
+  title: "Postgres until proven otherwise",
+  description:
+    "I run both MongoDB and PostgreSQL in production. My default flipped years ago, and the reason isn't performance — it's that schemas are promises, and Postgres makes you keep them.",
+  date: "2026-05-22",
+  tags: ["PostgreSQL", "MongoDB", "Databases", "Opinion"],
+};
+
+Every project starts with the same fork in the road, and I've taken both
+paths enough times to have a default: **Postgres, until the data proves
+otherwise.** Not because MongoDB is bad — it isn't, and I run it happily in
+production — but because of what each database does to your future self.
+
+## Schemas are promises
+
+A schema is not bureaucracy; it is a promise about what shape the data will
+be when you read it back. The question is never _whether_ your data has a
+schema — it always does — but _who enforces it_.
+
+- In Postgres, the database enforces it. Bad writes fail loudly, today.
+- In Mongo, your application enforces it. Bad writes succeed silently, and
+  fail three months later in a report nobody can explain.
+
+Document validation in Mongo narrows this gap, and libraries like Zod or
+Mongoose narrow it further. But an enforcement layer you must remember to
+apply is a different guarantee than one you cannot forget.
+
+<Callout type="warning" title="The migration myth">
+  "Schemaless means no migrations" is the most expensive sentence in NoSQL.
+  You don't skip migrations — you defer them into read-path code: every
+  consumer grows if-checks for every historical shape a document ever had.
+  The migration still happens; it's just smeared across your codebase.
+</Callout>
+
+## Where Mongo genuinely wins
+
+The honest list, from production experience — not the marketing one:
+
+1. **Documents that are truly documents.** CMS page trees, form builders,
+   event payloads — data that arrives and leaves as one nested blob, where
+   joining was never the point.
+2. **Shapes you don't control.** Webhook payloads and third-party syncs,
+   where the upstream changes without asking you.
+3. **Horizontal scale as a first-class citizen** — if you concretely know
+   you're heading past what one big Postgres box serves. Most of us aren't.
+
+Meanwhile `jsonb` quietly ended the old dichotomy: my default stack is
+relational tables for the entities that relate — users, orders, permissions
+— with a `jsonb` column where a document honestly is a document. One
+database, both models, real transactions.
+
+<PullQuote>
+  Relational for the data you promise, jsonb for the data you tolerate.
+</PullQuote>
+
+## The tell
+
+Here's the test I apply to any "which database?" debate: describe your data
+out loud. If the sentence contains "belongs to," "references," or "the total
+across" — that's a relational sentence, and fighting it in a document store
+means reimplementing joins in application code, badly, forever. If the
+sentence is "we store what we receive and show it back" — that's a document
+sentence, and normalizing it into fifteen tables is ceremony.
+
+<Takeaway>
+  Default to Postgres because promises kept early are cheap and promises
+  broken late are not. Reach for MongoDB when the data is honestly a
+  document. And when in doubt — a relational core with jsonb edges covers
+  ninety percent of real products.
+</Takeaway>
