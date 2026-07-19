@@ -87,7 +87,7 @@ export default function Page() {
     <>
       <main
         id="main"
-        className="bg-background text-foreground flex-1 scroll-smooth pb-16"
+        className="text-foreground flex-1 scroll-smooth pb-16"
       >
         {/* Intro */}
         <section

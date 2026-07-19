@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes'
 import { Geist_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site/header'
 import { CommandPalette } from '@/components/site/command-palette'
+import { CosmicBackground } from '@/components/canvas/cosmic-background'
 
 const geist_mono = Geist_Mono({
   variable: '--font-primary',
@@ -140,6 +141,7 @@ export default function RootLayout({
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <CosmicBackground />
           <a
             href="#main"
             className="focus:bg-primary focus:text-primary-foreground sr-only z-50 focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:rounded-md focus:px-4 focus:py-2"
