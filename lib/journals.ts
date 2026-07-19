@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import GithubSlugger from "github-slugger";
 
 export interface JournalMeta {
   title: string;
@@ -10,6 +11,12 @@ export interface JournalMeta {
 
 export interface JournalEntry extends JournalMeta {
   slug: string;
+}
+
+export interface JournalHeading {
+  id: string;
+  text: string;
+  level: 2 | 3;
 }
 
 const JOURNALS_DIR = path.join(process.cwd(), "content/journals");
@@ -46,4 +53,44 @@ export function formatJournalDate(date: string): string {
     day: "numeric",
     timeZone: "UTC",
   });
+}
+
+// Raw markdown body with the `export const meta` block stripped — used for
+// "Copy Markdown" and the open-with-AI actions.
+export function getJournalSource(slug: string): string | null {
+  for (const ext of [".mdx", ".md"]) {
+    const file = path.join(JOURNALS_DIR, `${slug}${ext}`);
+    if (fs.existsSync(file)) {
+      return fs
+        .readFileSync(file, "utf8")
+        .replace(/^export const meta = \{[\s\S]*?\};\s*/, "")
+        .trim();
+    }
+  }
+  return null;
+}
+
+// h2/h3 outline for the "On this page" sidebar. Slugs come from
+// github-slugger, the same library rehype-slug uses, so ids always match.
+export function getJournalHeadings(source: string): JournalHeading[] {
+  const slugger = new GithubSlugger();
+  const headings: JournalHeading[] = [];
+  let inCodeFence = false;
+
+  for (const line of source.split("\n")) {
+    if (/^\s*(```|~~~)/.test(line)) {
+      inCodeFence = !inCodeFence;
+      continue;
+    }
+    if (inCodeFence) continue;
+    const match = /^(#{2,3})\s+(.+?)\s*$/.exec(line);
+    if (!match) continue;
+    const text = match[2].replace(/[*_`]/g, "");
+    headings.push({
+      id: slugger.slug(text),
+      text,
+      level: match[1].length as 2 | 3,
+    });
+  }
+  return headings;
 }

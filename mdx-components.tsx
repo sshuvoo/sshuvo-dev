@@ -11,13 +11,19 @@ import {
 
 const components = {
   // Element mappings styled to the site's design tokens
-  h2: ({ children }) => (
-    <h2 className="mt-14 font-heading text-2xl font-semibold tracking-tight text-foreground">
+  h2: ({ id, children }) => (
+    <h2
+      id={id}
+      className="mt-14 scroll-mt-24 font-heading text-2xl font-semibold tracking-tight text-foreground"
+    >
       {children}
     </h2>
   ),
-  h3: ({ children }) => (
-    <h3 className="mt-10 font-heading text-lg font-semibold tracking-tight text-foreground">
+  h3: ({ id, children }) => (
+    <h3
+      id={id}
+      className="mt-10 scroll-mt-24 font-heading text-lg font-semibold tracking-tight text-foreground"
+    >
       {children}
     </h3>
   ),

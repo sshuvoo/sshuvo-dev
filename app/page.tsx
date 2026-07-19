@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { FlowField } from '@/components/canvas/flow-field'
-import { FourierMachine } from '@/components/canvas/fourier-machine'
 import { MiniSlate } from '@/components/canvas/mini-slate'
 import { QueueViz } from '@/components/canvas/queue-viz'
 import { Reveal } from '@/components/motion/reveal'
@@ -100,37 +99,32 @@ export default function Page() {
           id="top"
           className="mx-auto max-w-5xl px-4 py-24 sm:px-6 md:py-32"
         >
-          <div className="grid items-center gap-12 md:grid-cols-[1fr_1fr]">
-            <div>
-              <span className="font-secondary text-muted-foreground text-xs font-bold tracking-widest uppercase">
-                f(t) = Σ c_n * e^(2πint)
-              </span>
-              <h1 className="font-heading mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
-                Saffaullah Shuvo
-              </h1>
-              <p className="text-muted-foreground mt-3 text-lg sm:text-xl">
-                {site.tagline}
-              </p>
-              <p className="text-muted-foreground mt-6 text-sm leading-relaxed">
-                Applied Mathematics background. Core engineer on Sitepins CMS.
-                Full-stack specialist across React, Next.js, TypeScript,
-                Node.js, and Go, with MongoDB and PostgreSQL — building AI-first
-                products with AI-driven development workflows, graphics
-                programming, and pointer event loop systems.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-                <a
-                  href="#work"
-                  className="bg-primary text-primary-foreground focus-visible:ring-ring/50 rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-85 focus-visible:ring-3 focus-visible:outline-none"
-                >
-                  View projects
-                </a>
-                <ExternalLink href={site.github}>GitHub</ExternalLink>
-                <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
-              </div>
-            </div>
-            <div className="border-border bg-card rounded-xl border p-4">
-              <FourierMachine className="w-full" />
+          <div className="max-w-3xl">
+            <span className="font-secondary text-muted-foreground text-xs font-bold tracking-widest uppercase">
+              f(t) = Σ c_n * e^(2πint)
+            </span>
+            <h1 className="font-heading mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+              Saffaullah Shuvo
+            </h1>
+            <p className="text-muted-foreground mt-3 text-lg sm:text-xl">
+              {site.tagline}
+            </p>
+            <p className="text-muted-foreground mt-6 text-sm leading-relaxed">
+              Applied Mathematics background. Core engineer on Sitepins CMS.
+              Full-stack specialist across React, Next.js, TypeScript,
+              Node.js, and Go, with MongoDB and PostgreSQL — building AI-first
+              products with AI-driven development workflows, graphics
+              programming, and pointer event loop systems.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+              <a
+                href="#work"
+                className="bg-primary text-primary-foreground focus-visible:ring-ring/50 rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-85 focus-visible:ring-3 focus-visible:outline-none"
+              >
+                View projects
+              </a>
+              <ExternalLink href={site.github}>GitHub</ExternalLink>
+              <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
             </div>
           </div>
         </section>
