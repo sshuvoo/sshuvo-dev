@@ -14,6 +14,7 @@ import {
   MoonStar,
   NotebookPen,
   Search,
+  Trophy,
   UserRound,
 } from "lucide-react";
 import { caseStudies, site } from "@/lib/site";
@@ -72,6 +73,16 @@ export function CommandPalette() {
         keywords: "journal blog writing notes articles thoughts",
         run: () => {
           router.push("/journal");
+          close();
+        },
+      },
+      {
+        id: "leetcode",
+        label: "View LeetCode Profile",
+        icon: <Trophy className="size-4" aria-hidden />,
+        keywords: "leetcode problem solving algorithms data structures solutions dsa progress statistics",
+        run: () => {
+          router.push("/leetcode");
           close();
         },
       },
