@@ -75,7 +75,7 @@ export default function Image() {
             {site.name}
           </div>
           <div style={{ fontSize: 34, color: "#d4d4d4", marginTop: 12 }}>
-            Frontend engineer who thinks in systems and draws in code.
+            {site.tagline}
           </div>
           <div style={{ fontSize: 26, color: "#a3a3a3", marginTop: 28 }}>
             {site.url.replace("https://", "")}

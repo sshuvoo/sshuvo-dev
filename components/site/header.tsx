@@ -38,35 +38,35 @@ export function SiteHeader() {
   }, [onHome]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/75 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40">
       <motion.div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-px origin-left bg-foreground"
+        className="absolute inset-x-0 top-0 h-px origin-left bg-foreground"
         style={{ scaleX: reduced ? scrollYProgress : progress }}
       />
       <nav
         aria-label="Site"
-        className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6"
+        className="flex w-full items-center justify-between gap-4 p-4 font-secondary"
       >
         <Link
           href="/#top"
-          className="font-secondary text-sm font-medium tracking-tight text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="inline-flex h-9 items-center rounded-full border border-border bg-background/80 px-4 text-sm font-medium tracking-tight text-foreground shadow-lg backdrop-blur-md focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
           {site.shortName}
           <span aria-hidden className="text-muted-foreground">
             (t)
           </span>
         </Link>
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 shadow-lg backdrop-blur-md">
           {sections.map(({ id, label }) => (
             <Link
               key={id}
               href={`/#${id}`}
               aria-current={onHome && active === id ? "location" : undefined}
-              className={`hidden rounded-md px-2.5 py-1.5 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${
+              className={`hidden rounded-full px-2.5 py-1.5 text-[10px] font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${
                 onHome && active === id
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               {label}
@@ -76,7 +76,7 @@ export function SiteHeader() {
             type="button"
             onClick={() => dispatchEvent(new Event("open-command-palette"))}
             aria-label="Open command palette"
-            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-3 font-secondary text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-3 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
             <Command className="size-3.5" aria-hidden />
             <span className="hidden sm:inline">K</span>
