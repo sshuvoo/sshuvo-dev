@@ -2,17 +2,13 @@
 
 import { motion } from "motion/react";
 import {
-  Trophy,
-  Flame,
-  Calendar,
-  Award,
   ArrowUpRight,
   CheckCircle2,
   Code2,
   Database,
   Cpu,
-  Sparkles,
   BookOpen,
+  Zap,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site/header";
 import { CommandPalette } from "@/components/site/command-palette";
@@ -58,12 +54,12 @@ export default function ProblemSolvingPage() {
             <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-primary/5 blur-3xl" />
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-4">
-                <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted">
+                <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted mx-auto sm:mx-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={avatarUrl}
                     alt={name}
-                    className="h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-contain p-1"
                     onError={(e) => {
                       // Fallback to avatar text
                       e.currentTarget.style.display = "none";
@@ -106,7 +102,7 @@ export default function ProblemSolvingPage() {
                 <span className="font-secondary text-2xs font-bold tracking-widest text-muted-foreground uppercase">
                   Global Rank
                 </span>
-                <p className="mt-1 font-heading text-xl font-bold sm:text-2xl">
+                <p className="mt-1 font-heading text-base font-bold sm:text-lg">
                   #{rank.toLocaleString()}
                 </p>
               </div>
@@ -114,7 +110,7 @@ export default function ProblemSolvingPage() {
                 <span className="font-secondary text-2xs font-bold tracking-widest text-muted-foreground uppercase">
                   Contest Rating
                 </span>
-                <p className="mt-1 font-heading text-xl font-bold sm:text-2xl">
+                <p className="mt-1 font-heading text-base font-bold sm:text-lg">
                   {contest.rating}
                 </p>
               </div>
@@ -122,7 +118,7 @@ export default function ProblemSolvingPage() {
                 <span className="font-secondary text-2xs font-bold tracking-widest text-muted-foreground uppercase">
                   Acceptance Rate
                 </span>
-                <p className="mt-1 font-heading text-xl font-bold sm:text-2xl">
+                <p className="mt-1 font-heading text-base font-bold sm:text-lg">
                   {solved.acceptanceRate}%
                 </p>
               </div>
@@ -130,16 +126,29 @@ export default function ProblemSolvingPage() {
                 <span className="font-secondary text-2xs font-bold tracking-widest text-muted-foreground uppercase">
                   Max Streak
                 </span>
-                <p className="mt-1 font-heading text-xl font-bold text-orange-500 sm:text-2xl">
+                <p className="mt-1 font-heading text-base font-bold text-orange-500 sm:text-lg">
                   {activity.maxStreak} Days
                 </p>
               </div>
+            </div>
+
+            {/* Current Focus */}
+            <div className="mt-4 flex flex-wrap items-center gap-2 font-secondary text-xs text-muted-foreground">
+              <span className="text-foreground font-semibold">Currently focused on:</span>
+              <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 text-amber-600 dark:text-amber-400">
+                <Cpu className="size-3" />
+                Dynamic Programming
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-emerald-600 dark:text-emerald-400">
+                <Database className="size-3" />
+                PostgreSQL
+              </span>
             </div>
           </header>
         </Reveal>
 
         {/* Dashboard Grid */}
-        <div className="mt-8 grid gap-8 md:grid-cols-3">
+        <div className="mt-8 grid items-start gap-8 md:grid-cols-3">
           {/* Column 1 & 2: Main stats dashboard */}
           <div className="grid gap-8 md:col-span-2">
             
@@ -160,21 +169,21 @@ export default function ProblemSolvingPage() {
                         cy="88"
                         r="70"
                         className="stroke-muted fill-none"
-                        strokeWidth="8"
+                        strokeWidth="6"
                       />
                       <circle
                         cx="88"
                         cy="88"
                         r="55"
                         className="stroke-muted fill-none"
-                        strokeWidth="8"
+                        strokeWidth="6"
                       />
                       <circle
                         cx="88"
                         cy="88"
                         r="40"
                         className="stroke-muted fill-none"
-                        strokeWidth="8"
+                        strokeWidth="6"
                       />
                       {/* Active Lines */}
                       <motion.circle
@@ -182,7 +191,7 @@ export default function ProblemSolvingPage() {
                         cy="88"
                         r="70"
                         className="stroke-emerald-500 fill-none"
-                        strokeWidth="8"
+                        strokeWidth="6"
                         strokeDasharray={cEasy}
                         initial={{ strokeDashoffset: cEasy }}
                         animate={{ strokeDashoffset: oEasy }}
@@ -194,7 +203,7 @@ export default function ProblemSolvingPage() {
                         cy="88"
                         r="55"
                         className="stroke-yellow-500 fill-none"
-                        strokeWidth="8"
+                        strokeWidth="6"
                         strokeDasharray={cMedium}
                         initial={{ strokeDashoffset: cMedium }}
                         animate={{ strokeDashoffset: oMedium }}
@@ -206,7 +215,7 @@ export default function ProblemSolvingPage() {
                         cy="88"
                         r="40"
                         className="stroke-red-500 fill-none"
-                        strokeWidth="8"
+                        strokeWidth="6"
                         strokeDasharray={cHard}
                         initial={{ strokeDashoffset: cHard }}
                         animate={{ strokeDashoffset: oHard }}
@@ -215,11 +224,8 @@ export default function ProblemSolvingPage() {
                       />
                     </svg>
                     <div className="absolute flex flex-col items-center text-center">
-                      <span className="font-heading text-3xl font-bold">
+                      <span className="font-heading text-2xl font-bold">
                         {solved.total}
-                      </span>
-                      <span className="font-secondary text-3xs text-muted-foreground tracking-wider uppercase">
-                        Solved
                       </span>
                     </div>
                   </div>
@@ -296,110 +302,6 @@ export default function ProblemSolvingPage() {
               </section>
             </Reveal>
 
-            {/* Contest Stats */}
-            <Reveal>
-              <section className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur-md">
-                <h2 className="flex items-center gap-2 font-heading text-lg font-bold">
-                  <Trophy className="size-4.5 text-yellow-500" />
-                  Contest Performance
-                </h2>
-                <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                  <div className="rounded-xl border border-border bg-muted/20 p-4">
-                    <span className="font-secondary text-3xs font-bold tracking-widest text-muted-foreground uppercase">
-                      Global Percentile
-                    </span>
-                    <p className="mt-1 font-heading text-2xl font-bold">
-                      Top {contest.topPercentage}%
-                    </p>
-                    <p className="mt-1.5 font-secondary text-3xs text-muted-foreground leading-relaxed">
-                      Ranked in top 10% globally among {contest.totalParticipants.toLocaleString()} developers.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-muted/20 p-4">
-                    <span className="font-secondary text-3xs font-bold tracking-widest text-muted-foreground uppercase">
-                      Attended Contests
-                    </span>
-                    <p className="mt-1 font-heading text-2xl font-bold">
-                      {contest.attended}
-                    </p>
-                    <p className="mt-1.5 font-secondary text-3xs text-muted-foreground leading-relaxed">
-                      Actively participating in weekend weekly contests.
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-muted/20 p-4">
-                    <span className="font-secondary text-3xs font-bold tracking-widest text-muted-foreground uppercase">
-                      Contest Badge
-                    </span>
-                    <div className="mt-2 flex items-center gap-2">
-                      <Award className="size-6 text-yellow-500 shrink-0" />
-                      <div>
-                        <p className="font-secondary text-[11px] font-bold text-foreground">
-                          {activity.recentBadge.name}
-                        </p>
-                        <p className="font-secondary text-[9px] text-muted-foreground uppercase">
-                          Released {activity.recentBadge.year}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </Reveal>
-
-            {/* Languages Stacked Bar & List */}
-            <Reveal>
-              <section className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur-md">
-                <h2 className="flex items-center gap-2 font-heading text-lg font-bold">
-                  <Code2 className="size-4.5 text-primary" />
-                  Languages Ecosystem
-                </h2>
-                
-                {/* Horizontal bar representation */}
-                <div className="mt-6 flex h-3.5 w-full overflow-hidden rounded-full bg-muted">
-                  {languages.map((lang, idx) => {
-                    const pct = (lang.solved / solved.total) * 100;
-                    // Custom colors
-                    const colors = [
-                      "bg-blue-500 dark:bg-blue-600",
-                      "bg-emerald-500 dark:bg-emerald-600",
-                      "bg-amber-500 dark:bg-amber-600",
-                      "bg-indigo-500 dark:bg-indigo-600",
-                      "bg-rose-500 dark:bg-rose-600",
-                    ];
-                    return (
-                      <motion.div
-                        key={lang.name}
-                        style={{ width: `${pct}%`, transformOrigin: "left" }}
-                        className={`${colors[idx % colors.length]} h-full first:rounded-l-full last:rounded-r-full`}
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 1 }}
-                      />
-                    );
-                  })}
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-secondary text-xs">
-                  {languages.map((lang, idx) => {
-                    const colors = [
-                      "bg-blue-500",
-                      "bg-emerald-500",
-                      "bg-amber-500",
-                      "bg-indigo-500",
-                      "bg-rose-500",
-                    ];
-                    return (
-                      <div key={lang.name} className="flex items-center gap-2">
-                        <span className={`h-2.5 w-2.5 rounded-full ${colors[idx % colors.length]}`} />
-                        <span className="font-semibold text-foreground">{lang.name}</span>
-                        <span className="text-muted-foreground">{lang.solved} Solved</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            </Reveal>
-
             {/* Skills Tag Grid */}
             <Reveal>
               <section className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur-md">
@@ -472,58 +374,54 @@ export default function ProblemSolvingPage() {
             </Reveal>
           </div>
 
-          {/* Column 3: Consistency stats, recent items, and badge */}
+          {/* Column 3: Languages and recent items */}
           <div className="grid gap-8">
-            {/* Activity Card */}
+            {/* Languages Ecosystem */}
             <Reveal>
               <section className="rounded-2xl border border-border bg-card/60 p-6 backdrop-blur-md">
                 <h2 className="flex items-center gap-2 font-heading text-lg font-bold">
-                  <Calendar className="size-4.5 text-primary" />
-                  Consistency Stats
+                  <Code2 className="size-4.5 text-primary" />
+                  Languages Ecosystem
                 </h2>
-                <div className="mt-6 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500">
-                      <Flame className="size-5" />
-                    </div>
-                    <div>
-                      <p className="font-secondary text-2xs font-bold text-muted-foreground uppercase">
-                        Current Max Streak
-                      </p>
-                      <p className="font-heading text-xl font-bold">
-                        {activity.maxStreak} Active Days
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-500">
-                      <CheckCircle2 className="size-5" />
-                    </div>
-                    <div>
-                      <p className="font-secondary text-2xs font-bold text-muted-foreground uppercase">
-                        Annual Submissions
-                      </p>
-                      <p className="font-heading text-xl font-bold">
-                        {activity.submissionsPastYear} Submissions
-                      </p>
-                    </div>
-                  </div>
+                {(() => {
+                  const topLangs = languages.slice(0, 2);
+                  const colors = [
+                    "bg-blue-500 dark:bg-blue-600",
+                    "bg-emerald-500 dark:bg-emerald-600",
+                  ];
+                  const dotColors = ["bg-blue-500", "bg-emerald-500"];
+                  return (
+                    <>
+                      {/* Horizontal bar representation */}
+                      <div className="mt-6 flex h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                        {topLangs.map((lang, idx) => {
+                          const pct = (lang.solved / solved.total) * 100;
+                          return (
+                            <motion.div
+                              key={lang.name}
+                              style={{ width: `${pct}%`, transformOrigin: "left" }}
+                              className={`${colors[idx]} h-full first:rounded-l-full last:rounded-r-full`}
+                              initial={{ scaleX: 0 }}
+                              animate={{ scaleX: 1 }}
+                              transition={{ duration: 1 }}
+                            />
+                          );
+                        })}
+                      </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500">
-                      <Sparkles className="size-5" />
-                    </div>
-                    <div>
-                      <p className="font-secondary text-2xs font-bold text-muted-foreground uppercase">
-                        Total active days
-                      </p>
-                      <p className="font-heading text-xl font-bold">
-                        {activity.activeDays} Days Total
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                      <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-secondary text-xs">
+                        {topLangs.map((lang, idx) => (
+                          <div key={lang.name} className="flex items-center gap-2">
+                            <span className={`h-2.5 w-2.5 rounded-full ${dotColors[idx]}`} />
+                            <span className="font-semibold text-foreground">{lang.name}</span>
+                            <span className="text-muted-foreground">{lang.solved} Solved</span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  );
+                })()}
               </section>
             </Reveal>
 
@@ -537,10 +435,10 @@ export default function ProblemSolvingPage() {
                 
                 <div className="mt-6 flow-root">
                   <ul className="-mb-8">
-                    {recentSubmissions.map((ac, idx) => (
+                    {recentSubmissions.slice(0, 5).map((ac, idx, arr) => (
                       <li key={idx}>
                         <div className="relative pb-6">
-                          {idx !== recentSubmissions.length - 1 ? (
+                          {idx !== arr.length - 1 ? (
                             <span
                               className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-border"
                               aria-hidden="true"
