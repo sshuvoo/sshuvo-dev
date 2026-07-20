@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes'
 import { Google_Sans_Code, Inter, JetBrains_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site/header'
 import { CommandPalette } from '@/components/site/command-palette'
+import { SiteFooter } from '@/components/site/footer'
 import { CosmicBackground } from '@/components/canvas/cosmic-background'
 
 const font_primary = Inter({
@@ -161,6 +162,7 @@ export default function RootLayout({
           <SiteHeader />
           <CommandPalette />
           {children}
+          <SiteFooter />
         </ThemeProvider>
         <script
           type="application/ld+json"
