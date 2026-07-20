@@ -77,7 +77,7 @@ export default async function JournalEntryPage({
     <>
       <main
         id="main"
-        className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6"
+        className="mx-auto w-full max-w-3xl flex-1 px-4 pt-32 pb-24 sm:px-6"
       >
         <Reveal>
           <div className="xl:relative">

@@ -55,7 +55,7 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6">
+      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-32 pb-24 sm:px-6">
         <Reveal>
           <Link
             href="/#work"

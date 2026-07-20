@@ -24,7 +24,7 @@ export default async function JournalPage() {
 
   return (
     <>
-      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6">
+      <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-32 pb-24 sm:px-6">
         <Reveal>
           <header>
             <p className="font-secondary text-xs font-bold tracking-widest text-muted-foreground uppercase">

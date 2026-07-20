@@ -50,7 +50,7 @@ export default function ProblemSolvingPage() {
     <>
       <main
         id="main"
-        className="mx-auto w-full max-w-5xl flex-1 px-4 pt-28 pb-24 sm:px-6"
+        className="mx-auto w-full max-w-5xl flex-1 px-4 pt-32 pb-24 sm:px-6"
       >
         <ProfileHeader
           data={{ username, name, profileUrl, avatarUrl, rank, solved, contest, activity }}

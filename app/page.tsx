@@ -92,7 +92,7 @@ export default function Page() {
         {/* Intro */}
         <section
           id="top"
-          className="mx-auto max-w-5xl px-4 py-24 sm:px-6 md:py-32"
+          className="mx-auto max-w-5xl px-4 pt-32 pb-24 sm:px-6 md:pt-40 md:pb-32"
         >
           <div className="max-w-3xl">
             <span className="hero-badge font-secondary text-muted-foreground text-xs font-bold tracking-widest uppercase">
@@ -128,7 +128,7 @@ export default function Page() {
         {/* Projects */}
         <section
           id="work"
-          className="border-border mx-auto max-w-5xl scroll-mt-14 border-t px-4 py-20 sm:px-6"
+          className="border-border mx-auto max-w-5xl scroll-mt-24 border-t px-4 py-20 sm:px-6"
         >
           <Reveal>
             <SectionHeading index="01">
@@ -231,7 +231,7 @@ export default function Page() {
         {/* Labs */}
         <section
           id="lab"
-          className="border-border mx-auto max-w-5xl scroll-mt-14 border-t px-4 py-20 sm:px-6"
+          className="border-border mx-auto max-w-5xl scroll-mt-24 border-t px-4 py-20 sm:px-6"
         >
           <Reveal>
             <SectionHeading index="02">
@@ -264,7 +264,7 @@ export default function Page() {
         {/* Timeline Graph */}
         <section
           id="experience"
-          className="border-border mx-auto max-w-5xl scroll-mt-14 border-t px-4 py-20 sm:px-6"
+          className="border-border mx-auto max-w-5xl scroll-mt-24 border-t px-4 py-20 sm:px-6"
         >
           <Reveal>
             <SectionHeading index="03">
@@ -280,7 +280,7 @@ export default function Page() {
         {/* Contact */}
         <section
           id="contact"
-          className="border-border mx-auto max-w-5xl scroll-mt-14 border-t px-4 py-20 sm:px-6"
+          className="border-border mx-auto max-w-5xl scroll-mt-24 border-t px-4 py-20 sm:px-6"
         >
           <Reveal>
             <h2 className="font-heading text-3xl font-bold tracking-tight">
