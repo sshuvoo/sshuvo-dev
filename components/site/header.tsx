@@ -75,7 +75,7 @@ export function SiteHeader() {
           >
             {site.shortName}
             <span aria-hidden className="text-muted-foreground">
-              (t)
+              ()
             </span>
           </Link>
           <div
