@@ -6,6 +6,7 @@ import { QueueViz } from '@/components/canvas/queue-viz'
 import { Reveal } from '@/components/motion/reveal'
 import { site } from '@/lib/site'
 import { CareerTimeline } from '@/components/site/career-timeline'
+import { EducationOrigin } from '@/components/site/education-origin'
 
 // Reusable External Link
 function ExternalLink({
@@ -275,6 +276,24 @@ export default function Page() {
             </p>
           </Reveal>
           <CareerTimeline />
+        </section>
+
+        {/* Education — the origin function */}
+        <section
+          id="education"
+          className="border-border mx-auto max-w-5xl scroll-mt-24 border-t px-4 py-20 sm:px-6"
+        >
+          <Reveal>
+            <SectionHeading index="04">
+              Proof of origin
+            </SectionHeading>
+            <p className="text-muted-foreground mt-4 mb-10 max-w-prose text-sm">
+              Every engineer has a starting point. Mine was a proof, not a
+              product — so here it is, written the way I learned to think. From
+              an Applied Mathematics axiom to a software engineer, Q.E.D.
+            </p>
+          </Reveal>
+          <EducationOrigin />
         </section>
 
         {/* Contact */}

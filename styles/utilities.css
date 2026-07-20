@@ -81,6 +81,28 @@
   }
 }
 
+/* ── Education proof — Q.E.D. tombstone (blinks like a cursor) ── */
+
+.edu-caret {
+  animation: edu-caret-blink 1.1s step-end infinite;
+}
+
+@keyframes edu-caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edu-caret {
+    animation: none;
+  }
+}
+
 .cosmic-bg {
   position: fixed;
   inset: 0;
