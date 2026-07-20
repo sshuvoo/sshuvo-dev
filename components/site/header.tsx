@@ -54,20 +54,37 @@ export function SiteHeader() {
       />
       <nav
         aria-label="Site"
-        className={`mx-auto flex w-full items-center justify-between gap-4 p-4 font-secondary transition-[max-width,padding] duration-500 ease-in-out motion-reduce:transition-none ${
+        className={`mx-auto flex w-full items-center p-4 font-secondary transition-[max-width] duration-500 ease-in-out motion-reduce:transition-none ${
           scrolled ? "max-w-full" : "max-w-5xl sm:px-6"
         }`}
       >
-        <Link
-          href="/#top"
-          className="inline-flex h-9 items-center rounded-full border border-border bg-background/80 px-4 text-sm font-medium tracking-tight text-foreground shadow-lg backdrop-blur-md focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+        <div
+          className={`flex w-full items-center justify-between gap-4 rounded-full border transition-all duration-500 ease-in-out motion-reduce:transition-none ${
+            scrolled
+              ? "border-transparent bg-transparent"
+              : "border-border bg-background/80 p-1.5 shadow-lg backdrop-blur-md"
+          }`}
         >
-          {site.shortName}
-          <span aria-hidden className="text-muted-foreground">
-            (t)
-          </span>
-        </Link>
-        <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-3 py-1.5 shadow-lg backdrop-blur-md">
+          <Link
+            href="/#top"
+            className={`inline-flex h-9 items-center rounded-full border px-4 text-sm font-medium tracking-tight text-foreground transition-all duration-500 ease-in-out focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none motion-reduce:transition-none ${
+              scrolled
+                ? "border-border bg-background/80 shadow-lg backdrop-blur-md"
+                : "border-transparent bg-transparent"
+            }`}
+          >
+            {site.shortName}
+            <span aria-hidden className="text-muted-foreground">
+              (t)
+            </span>
+          </Link>
+          <div
+            className={`flex items-center gap-2 rounded-full border px-3 py-1.5 transition-all duration-500 ease-in-out motion-reduce:transition-none ${
+              scrolled
+                ? "border-border bg-background/80 shadow-lg backdrop-blur-md"
+                : "border-transparent bg-transparent"
+            }`}
+          >
           {sections.map(({ id, label }) => (
             <Link
               key={id}
@@ -114,6 +131,7 @@ export function SiteHeader() {
             <span className="hidden sm:inline">K</span>
           </button>
           <ThemeToggle />
+        </div>
         </div>
       </nav>
     </header>
