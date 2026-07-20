@@ -77,10 +77,10 @@ export default async function JournalEntryPage({
     <>
       <main
         id="main"
-        className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6 xl:max-w-6xl"
+        className="mx-auto w-full max-w-3xl flex-1 px-4 pt-28 pb-24 sm:px-6"
       >
         <Reveal>
-          <div className="xl:grid xl:grid-cols-[minmax(0,48rem)_1fr] xl:gap-14">
+          <div className="xl:relative">
             <div>
               <Link
                 href="/journal"
@@ -148,7 +148,7 @@ export default async function JournalEntryPage({
               )}
             </div>
 
-            <aside className="hidden xl:block">
+            <aside className="hidden xl:absolute xl:inset-y-0 xl:left-full xl:block xl:w-64 xl:pl-14">
               <div className="sticky top-28">
                 <TableOfContents headings={headings} />
               </div>

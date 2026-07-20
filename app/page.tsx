@@ -95,7 +95,8 @@ export default function Page() {
           className="mx-auto max-w-5xl px-4 py-24 sm:px-6 md:py-32"
         >
           <div className="max-w-3xl">
-            <span className="font-secondary text-muted-foreground text-xs font-bold tracking-widest uppercase">
+            <span className="hero-badge font-secondary text-muted-foreground text-xs font-bold tracking-widest uppercase">
+              <span aria-hidden className="hero-badge-dot" />
               Saffaullah Shuvo
             </span>
             <h1 className="font-heading mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">

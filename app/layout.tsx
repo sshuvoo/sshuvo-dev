@@ -2,13 +2,23 @@ import { site } from '@/lib/site'
 import '@/styles/globals.css'
 import type { Metadata, Viewport } from 'next'
 import { ThemeProvider } from 'next-themes'
-import { Geist_Mono } from 'next/font/google'
+import { Google_Sans_Code, Inter, JetBrains_Mono } from 'next/font/google'
 import { SiteHeader } from '@/components/site/header'
 import { CommandPalette } from '@/components/site/command-palette'
 import { CosmicBackground } from '@/components/canvas/cosmic-background'
 
-const geist_mono = Geist_Mono({
+const font_primary = Inter({
   variable: '--font-primary',
+  subsets: ['latin'],
+})
+
+const font_secondary = JetBrains_Mono({
+  variable: '--font-secondary',
+  subsets: ['latin'],
+})
+
+const font_heading = Google_Sans_Code({
+  variable: '--font-heading',
   subsets: ['latin'],
 })
 
@@ -137,10 +147,10 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${geist_mono.variable} h-full antialiased`}
+      className={`${font_primary.variable} ${font_secondary.variable} ${font_heading.variable} h-full antialiased`}
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <CosmicBackground />
           <a
             href="#main"
