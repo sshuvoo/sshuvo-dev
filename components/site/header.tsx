@@ -19,6 +19,14 @@ export function SiteHeader() {
     restDelta: 0.001,
   });
   const [active, setActive] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!onHome) return;
@@ -46,7 +54,9 @@ export function SiteHeader() {
       />
       <nav
         aria-label="Site"
-        className="flex w-full items-center justify-between gap-4 p-4 font-secondary"
+        className={`mx-auto flex w-full items-center justify-between gap-4 p-4 font-secondary transition-[max-width,padding] duration-500 ease-in-out motion-reduce:transition-none ${
+          scrolled ? "max-w-full" : "max-w-5xl sm:px-6"
+        }`}
       >
         <Link
           href="/#top"
