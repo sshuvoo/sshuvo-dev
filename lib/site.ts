@@ -7,9 +7,7 @@ import siteConfig from "@/configs/site.json";
 export const site = siteConfig;
 
 export const sections = [
-  { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "contact", label: "Contact" },
+  { id: "work", label: "Case Studies" },
 ] as const;
 
 export const caseStudies = [
