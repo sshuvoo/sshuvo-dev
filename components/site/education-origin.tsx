@@ -76,7 +76,7 @@ export function EducationOrigin() {
             <h3 className="font-heading text-base leading-tight font-semibold">
               University of Rajshahi
             </h3>
-            <p className="font-secondary text-2xs text-muted-foreground mt-1 font-bold tracking-widest uppercase">
+            <p className="font-secondary text-[0.625rem] text-muted-foreground mt-1 font-bold tracking-widest uppercase">
               B.Sc. Applied Mathematics · 2018—2022
             </p>
           </div>
@@ -91,7 +91,7 @@ export function EducationOrigin() {
         <p className="font-secondary text-2xs text-muted-foreground font-bold tracking-widest uppercase">
           Claim
         </p>
-        <p className="font-secondary text-foreground mt-2 text-sm sm:text-base">
+        <p className="font-secondary text-foreground mt-2 text-sm leading-relaxed">
           <span className="text-muted-foreground">∃</span> a path{" "}
           <span className="font-semibold">P</span> such that{" "}
           <span className="font-semibold">P</span>
@@ -134,7 +134,7 @@ export function EducationOrigin() {
                     {step.year}
                   </span>
                   <span
-                    className={`leading-relaxed ${
+                    className={`leading-normal ${
                       step.spark ? "text-foreground" : "text-foreground/90"
                     }`}
                   >
@@ -153,7 +153,7 @@ export function EducationOrigin() {
 
       {/* Q.E.D. — ties back to the sshuvo() logo */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border bg-muted/20 px-6 py-5">
-        <p className="font-secondary text-foreground flex items-center gap-2 text-sm sm:text-base">
+        <p className="font-secondary text-foreground flex items-center gap-2 text-sm">
           <span className="flex flex-col items-center leading-none">
             <span className="font-semibold">lim</span>
             <span className="text-2xs text-muted-foreground mt-0.5">
