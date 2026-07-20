@@ -100,6 +100,17 @@ export function SiteHeader() {
             </Link>
           ))}
           <Link
+            href="/about"
+            aria-current={pathname === "/about" ? "page" : undefined}
+            className={`hidden rounded-full px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${
+              pathname === "/about"
+                ? "bg-muted text-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            }`}
+          >
+            About
+          </Link>
+          <Link
             href="/journal"
             aria-current={pathname.startsWith("/journal") ? "page" : undefined}
             className={`hidden rounded-full px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${

@@ -6,21 +6,62 @@ import { formatJournalDate, getAllJournals } from "@/lib/journals";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Journal",
+  title: "Journal — Software Engineering Blog | React, Next.js, TypeScript",
   description:
-    "Tech notes, opinions, and field reports on AI-first development, React, Node.js, Go, and databases — by Saffaullah Shuvo.",
+    "Tech notes, opinions, and field reports on AI-first development, React, Next.js, TypeScript, Node.js, Go, and databases — by Saffaullah Shuvo, a full-stack software engineer.",
+  keywords: [
+    'Software Engineering Blog',
+    'React Blog',
+    'Next.js Blog',
+    'TypeScript Blog',
+    'Node.js Blog',
+    'Go Blog',
+    'Web Development Blog',
+    'AI Development Blog',
+    'Full-Stack Development Blog',
+    'Frontend Engineering Blog',
+    'Backend Engineering Blog',
+    'Software Architecture Blog',
+    'Performance Optimization Blog',
+  ],
   alternates: { canonical: "/journal" },
   openGraph: {
     type: "website",
     url: `${site.url}/journal`,
-    title: `Journal — ${site.name}`,
+    title: `Journal — Software Engineering Blog | ${site.name}`,
     description:
-      "Tech notes, opinions, and field reports on AI-first development, React, Node.js, Go, and databases.",
+      "Tech notes, opinions, and field reports on AI-first development, React, Next.js, TypeScript, Node.js, Go, and databases.",
   },
 };
 
 export default async function JournalPage() {
   const journals = await getAllJournals();
+
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Saffaullah Shuvo — Software Engineering Blog',
+    description:
+      'Tech notes, opinions, and field reports on AI-first development, React, Next.js, TypeScript, Node.js, Go, and databases.',
+    url: `${site.url}/journal`,
+    author: {
+      '@type': 'Person',
+      name: site.name,
+      url: site.url,
+    },
+    blogPost: journals.map((entry) => ({
+      '@type': 'BlogPosting',
+      headline: entry.title,
+      description: entry.description,
+      datePublished: entry.date,
+      url: `${site.url}/journal/${entry.slug}`,
+      author: {
+        '@type': 'Person',
+        name: site.name,
+        url: site.url,
+      },
+    })),
+  }
 
   return (
     <>
@@ -91,6 +132,10 @@ export default async function JournalPage() {
           </div>
         </Reveal>
       </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
     </>
   );
 }

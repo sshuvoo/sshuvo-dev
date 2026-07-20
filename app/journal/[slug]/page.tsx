@@ -30,8 +30,16 @@ export async function generateMetadata({
   const entry = await getJournalEntry(slug);
   if (!entry) return {};
   return {
-    title: entry.title,
-    description: entry.description,
+    title: `${entry.title} — Software Engineering Blog`,
+    description: `${entry.description} — Written by Saffaullah Shuvo, a full-stack software engineer.`,
+    keywords: [
+      ...entry.tags,
+      'Software Engineering Blog',
+      'Web Development Blog',
+      'React Blog',
+      'Next.js Blog',
+      'TypeScript Blog',
+    ],
     alternates: { canonical: `/journal/${slug}` },
     openGraph: {
       type: "article",

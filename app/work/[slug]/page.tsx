@@ -21,8 +21,18 @@ export async function generateMetadata({
   const cs = caseStudyContent[slug as CaseStudySlug];
   if (!cs) return {};
   return {
-    title: cs.title,
-    description: cs.tagline,
+    title: `${cs.title} — Software Engineering Case Study`,
+    description: `${cs.tagline} — A detailed case study by Saffaullah Shuvo, a full-stack software engineer specializing in React, Next.js, and TypeScript.`,
+    keywords: [
+      cs.title,
+      ...cs.stack,
+      'Software Engineering Case Study',
+      'Web Development Project',
+      'React Project',
+      'Next.js Project',
+      'TypeScript Project',
+      'Full-Stack Project',
+    ],
     alternates: { canonical: `/work/${cs.slug}` },
     openGraph: {
       type: "article",

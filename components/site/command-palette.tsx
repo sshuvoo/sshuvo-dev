@@ -47,6 +47,16 @@ export function CommandPalette() {
   const commands = useMemo<Command[]>(
     () => [
       {
+        id: "about",
+        label: "About / Hire Me",
+        icon: <UserRound className="size-4" aria-hidden />,
+        keywords: "about hire me contact skills resume cv",
+        run: () => {
+          router.push("/about");
+          close();
+        },
+      },
+      {
         id: "work",
         label: "Go to Work",
         icon: <Briefcase className="size-4" aria-hidden />,

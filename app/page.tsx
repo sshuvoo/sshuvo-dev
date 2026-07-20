@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { FlowField } from '@/components/canvas/flow-field'
@@ -7,6 +8,20 @@ import { Reveal } from '@/components/motion/reveal'
 import { site } from '@/lib/site'
 import { CareerTimeline } from '@/components/site/career-timeline'
 import { EducationOrigin } from '@/components/site/education-origin'
+
+export const metadata: Metadata = {
+  title: 'Saffaullah Shuvo — Full-Stack Software Engineer | React, Next.js, TypeScript',
+  description:
+    'Full-stack software engineer specializing in React, Next.js, TypeScript, and Node.js. Building AI-first web applications with MongoDB, PostgreSQL, and Go. Core engineer at Themefisher with 3+ years of experience.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: site.url,
+    title: 'Saffaullah Shuvo — Full-Stack Software Engineer',
+    description:
+      'Full-stack software engineer specializing in React, Next.js, TypeScript, and Node.js. Building AI-first web applications with MongoDB, PostgreSQL, and Go.',
+  },
+}
 
 // Reusable External Link
 function ExternalLink({
@@ -107,16 +122,22 @@ export default function Page() {
               {site.tagline}
             </p>
             <p className="text-muted-foreground mt-6 text-sm leading-relaxed">
-              Applied Mathematics background. Core engineer on Sitepins CMS.
-              Full-stack specialist across React, Next.js, TypeScript,
-              Node.js, and Go, with MongoDB and PostgreSQL — building AI-first
-              products with AI-driven development workflows, graphics
-              programming, and pointer event loop systems.
+              Full-stack software engineer specializing in React, Next.js,
+              TypeScript, and Node.js. Core engineer at Themefisher building
+              AI-first web applications with MongoDB, PostgreSQL, and Go.
+              Applied Mathematics background with 3+ years of experience
+              shipping production-ready code.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+              <Link
+                href="/about"
+                className="bg-primary text-primary-foreground focus-visible:ring-ring/50 rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-85 focus-visible:ring-3 focus-visible:outline-none"
+              >
+                Hire me
+              </Link>
               <a
                 href="#work"
-                className="bg-primary text-primary-foreground focus-visible:ring-ring/50 rounded-md px-4 py-2 text-sm font-medium transition-opacity hover:opacity-85 focus-visible:ring-3 focus-visible:outline-none"
+                className="focus-visible:ring-ring/50 rounded-md border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted/50 focus-visible:ring-3 focus-visible:outline-none"
               >
                 View projects
               </a>

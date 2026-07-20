@@ -8,9 +8,9 @@ import { LanguagesEcosystem } from "./components/languages-ecosystem";
 import { RecentAccepted } from "./components/recent-accepted";
 
 export const metadata: Metadata = {
-  title: "Problem Solving",
+  title: "Problem Solving — LeetCode Stats | Software Engineer",
   description:
-    "LeetCode problem solving stats, progress, and skills showcase. 245+ problems solved across TypeScript and PostgreSQL with focus on Dynamic Programming and Database algorithms.",
+    "LeetCode problem solving stats, progress, and skills showcase. 245+ problems solved across TypeScript and PostgreSQL with focus on Dynamic Programming and Database algorithms. Software engineer profile.",
   keywords: [
     "LeetCode",
     "Problem Solving",
@@ -23,10 +23,13 @@ export const metadata: Metadata = {
     "Coding Challenges",
     "Competitive Programming",
     "Algorithm Practice",
+    "Software Engineer LeetCode",
+    "Full-Stack Developer LeetCode",
+    "React Developer LeetCode",
     "Saffaullah Shuvo",
   ],
   openGraph: {
-    title: "Problem Solving",
+    title: "Problem Solving — LeetCode Stats | Saffaullah Shuvo",
     description:
       "LeetCode problem solving stats and skills. 245+ problems solved with focus on Dynamic Programming and PostgreSQL.",
     url: `${site.url}/problem-solving`,
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Problem Solving",
+    title: "Problem Solving — LeetCode Stats",
     description:
       "LeetCode problem solving stats and skills. 245+ problems solved with focus on Dynamic Programming and PostgreSQL.",
   },
