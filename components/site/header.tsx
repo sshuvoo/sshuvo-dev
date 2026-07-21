@@ -122,15 +122,15 @@ export function SiteHeader() {
             Journal
           </Link>
           <Link
-            href="/problem-solving"
-            aria-current={pathname.startsWith("/problem-solving") ? "page" : undefined}
+            href="/grind"
+            aria-current={pathname.startsWith("/grind") ? "page" : undefined}
             className={`hidden rounded-full px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:inline-block ${
-              pathname.startsWith("/problem-solving")
+              pathname.startsWith("/grind")
                 ? "bg-muted text-foreground"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
-            Problem Solving
+            Grind
           </Link>
           <button
             type="button"

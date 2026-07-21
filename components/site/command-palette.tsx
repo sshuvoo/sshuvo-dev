@@ -87,12 +87,12 @@ export function CommandPalette() {
         },
       },
       {
-        id: "problem-solving",
-        label: "Problem Solving & DSA",
+        id: "grind",
+        label: "Grind — LeetCode & DSA",
         icon: <Trophy className="size-4" aria-hidden />,
-        keywords: "leetcode problem solving algorithms data structures solutions dsa progress statistics",
+        keywords: "leetcode grind problem solving algorithms data structures solutions dsa progress statistics",
         run: () => {
-          router.push("/problem-solving");
+          router.push("/grind");
           close();
         },
       },

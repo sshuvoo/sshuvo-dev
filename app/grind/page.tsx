@@ -29,20 +29,20 @@ export const metadata: Metadata = {
     "Saffaullah Shuvo",
   ],
   openGraph: {
-    title: "Problem Solving — LeetCode Stats | Saffaullah Shuvo",
+    title: "Grind — LeetCode Stats | Saffaullah Shuvo",
     description:
       "LeetCode problem solving stats and skills. 245+ problems solved with focus on Dynamic Programming and PostgreSQL.",
-    url: `${site.url}/problem-solving`,
+    url: `${site.url}/grind`,
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Problem Solving — LeetCode Stats",
+    title: "Grind — LeetCode Stats",
     description:
       "LeetCode problem solving stats and skills. 245+ problems solved with focus on Dynamic Programming and PostgreSQL.",
   },
   alternates: {
-    canonical: "/problem-solving",
+    canonical: "/grind",
   },
 };
 
