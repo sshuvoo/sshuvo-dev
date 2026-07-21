@@ -103,7 +103,7 @@ export function CommandPalette() {
         icon: <FileText className="size-4" aria-hidden />,
         keywords: `${cs.title} ${cs.tagline} case study read`,
         run: () => {
-          router.push(`/work/${cs.slug}`);
+          router.push(`/case-study/${cs.slug}`);
           close();
         },
       })),

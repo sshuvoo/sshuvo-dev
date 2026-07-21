@@ -33,10 +33,10 @@ export async function generateMetadata({
       'TypeScript Project',
       'Full-Stack Project',
     ],
-    alternates: { canonical: `/work/${cs.slug}` },
+    alternates: { canonical: `/case-study/${cs.slug}` },
     openGraph: {
       type: "article",
-      url: `${site.url}/work/${cs.slug}`,
+      url: `${site.url}/case-study/${cs.slug}`,
       title: `${cs.title} — ${site.name}`,
       description: cs.tagline,
     },
@@ -57,7 +57,7 @@ export default async function CaseStudyPage({
     "@type": "Article",
     headline: cs.title,
     description: cs.tagline,
-    url: `${site.url}/work/${cs.slug}`,
+    url: `${site.url}/case-study/${cs.slug}`,
     author: { "@type": "Person", name: site.name, url: site.url },
   };
 
@@ -142,7 +142,7 @@ export default async function CaseStudyPage({
               {others.map((other) => (
                 <Link
                   key={other.slug}
-                  href={`/work/${other.slug}`}
+                  href={`/case-study/${other.slug}`}
                   className="group rounded-xl border border-border p-5 transition-colors hover:bg-muted/50 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
                 >
                   <p className="font-heading font-semibold group-hover:underline group-hover:underline-offset-4">

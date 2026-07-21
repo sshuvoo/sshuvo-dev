@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.95,
     },
     ...caseStudies.map((cs) => ({
-      url: `${site.url}/work/${cs.slug}`,
+      url: `${site.url}/case-study/${cs.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,

@@ -251,7 +251,7 @@ export default function AboutPage() {
               {caseStudies.map((cs) => (
                 <Link
                   key={cs.slug}
-                  href={`/work/${cs.slug}`}
+                  href={`/case-study/${cs.slug}`}
                   className="group rounded-xl border border-border p-5 transition-colors hover:bg-muted/50 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
                 >
                   <p className="font-heading font-semibold group-hover:underline group-hover:underline-offset-4">

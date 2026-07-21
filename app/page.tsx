@@ -59,7 +59,7 @@ function CaseStudyLink({
 }) {
   return (
     <Link
-      href={`/work/${slug}`}
+      href={`/case-study/${slug}`}
       className="group text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1.5 text-sm font-medium focus-visible:ring-3 focus-visible:outline-none"
     >
       <span className="decoration-border group-hover:decoration-foreground underline underline-offset-4 transition-colors">
