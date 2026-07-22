@@ -100,28 +100,15 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link
-              href="/about"
-              aria-current={pathname === '/about' ? 'page' : undefined}
-              className={`focus-visible:ring-ring/50 hidden rounded-full px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:outline-none sm:inline-block ${
-                pathname === '/about'
-                  ? 'bg-muted text-foreground'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-              }`}
-            >
-              About
-            </Link>
-            <Link
               href="/journal"
-              aria-current={
-                pathname.startsWith('/journal') ? 'page' : undefined
-              }
+              aria-current={pathname.startsWith('/journal') ? 'page' : undefined}
               className={`focus-visible:ring-ring/50 hidden rounded-full px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:outline-none sm:inline-block ${
                 pathname.startsWith('/journal')
                   ? 'bg-muted text-foreground'
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
               }`}
             >
-              Journal
+              Journals
             </Link>
             <Link
               href="/grind"
@@ -133,6 +120,17 @@ export function SiteHeader() {
               }`}
             >
               Grind
+            </Link>
+            <Link
+              href="/about"
+              aria-current={pathname === '/about' ? 'page' : undefined}
+              className={`focus-visible:ring-ring/50 hidden rounded-full px-2.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors focus-visible:ring-3 focus-visible:outline-none sm:inline-block ${
+                pathname === '/about'
+                  ? 'bg-muted text-foreground'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+              }`}
+            >
+              About
             </Link>
             <button
               type="button"

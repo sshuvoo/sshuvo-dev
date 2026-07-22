@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
@@ -15,6 +16,7 @@ export interface CaseStudyMeta {
   tagline: string;
   role: string;
   stack: string[];
+  cover: string;
   liveUrl?: { href: string; label: string };
   takeaway: string;
 }
@@ -52,6 +54,7 @@ export async function generateMetadata({
       url: `${site.url}/case-study/${slug}`,
       title: `${cs.title} — ${site.name}`,
       description: cs.tagline,
+      images: [{ url: cs.cover, alt: cs.title }],
     },
   };
 }
@@ -117,6 +120,18 @@ export default async function CaseStudyPage({
                 </p>
               )}
             </header>
+
+            <div className="mt-10 overflow-hidden rounded-xl border border-border">
+              <Image
+                src={cs.cover}
+                alt={`${cs.title} cover`}
+                width={2932}
+                height={1666}
+                priority
+                sizes="(max-width: 768px) 100vw, 48rem"
+                className="h-auto w-full"
+              />
+            </div>
 
             <div className="mt-14">
               <Content />
