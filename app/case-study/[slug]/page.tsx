@@ -2,12 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { caseStudyContent } from "@/lib/case-studies";
 import { caseStudies, site, type CaseStudySlug } from "@/lib/site";
+import { getEntry, getSlugs } from "@/lib/mdx";
 import { Reveal } from "@/components/motion/reveal";
 
+const DIR = "content/case-studies";
+const importer = (slug: string) => import(`@/content/case-studies/${slug}.mdx`);
+
+export interface CaseStudyMeta {
+  title: string;
+  tagline: string;
+  role: string;
+  stack: string[];
+  liveUrl?: { href: string; label: string };
+  takeaway: string;
+}
+
 export function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  return getSlugs(DIR).map((slug) => ({ slug }));
 }
 
 export const dynamicParams = false;
@@ -18,7 +30,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const cs = caseStudyContent[slug as CaseStudySlug];
+  const cs = await getEntry<CaseStudyMeta>(importer, slug);
   if (!cs) return {};
   return {
     title: `${cs.title} — Software Engineering Case Study`,
@@ -26,17 +38,17 @@ export async function generateMetadata({
     keywords: [
       cs.title,
       ...cs.stack,
-      'Software Engineering Case Study',
-      'Web Development Project',
-      'React Project',
-      'Next.js Project',
-      'TypeScript Project',
-      'Full-Stack Project',
+      "Software Engineering Case Study",
+      "Web Development Project",
+      "React Project",
+      "Next.js Project",
+      "TypeScript Project",
+      "Full-Stack Project",
     ],
-    alternates: { canonical: `/case-study/${cs.slug}` },
+    alternates: { canonical: `/case-study/${slug}` },
     openGraph: {
       type: "article",
-      url: `${site.url}/case-study/${cs.slug}`,
+      url: `${site.url}/case-study/${slug}`,
       title: `${cs.title} — ${site.name}`,
       description: cs.tagline,
     },
@@ -49,19 +61,21 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const cs = caseStudyContent[slug as CaseStudySlug];
+  const cs = await getEntry<CaseStudyMeta>(importer, slug);
   if (!cs) notFound();
+
+  const { default: Content } = await import(`@/content/case-studies/${slug}.mdx`);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: cs.title,
     description: cs.tagline,
-    url: `${site.url}/case-study/${cs.slug}`,
+    url: `${site.url}/case-study/${slug}`,
     author: { "@type": "Person", name: site.name, url: site.url },
   };
 
-  const others = caseStudies.filter((c) => c.slug !== cs.slug);
+  const others = caseStudies.filter((c) => c.slug !== (slug as CaseStudySlug));
 
   return (
     <>
@@ -108,21 +122,9 @@ export default async function CaseStudyPage({
               )}
             </header>
 
-            {cs.chapters.map((chapter, i) => (
-              <section key={chapter.heading} className="mt-14">
-                <h2 className="flex items-baseline gap-3 font-heading text-2xl font-semibold tracking-tight">
-                  <span aria-hidden className="font-secondary text-sm font-normal text-muted-foreground">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  {chapter.heading}
-                </h2>
-                {chapter.body.map((para) => (
-                  <p key={para.slice(0, 32)} className="mt-5 leading-relaxed text-muted-foreground">
-                    {para}
-                  </p>
-                ))}
-              </section>
-            ))}
+            <div className="mt-14">
+              <Content />
+            </div>
 
             <footer className="mt-16 rounded-xl border border-border p-6 sm:p-8">
               <p className="font-secondary text-xs tracking-wide text-muted-foreground uppercase">

@@ -1,0 +1,20 @@
+export const meta = {
+  title: "stl-kit",
+  tagline: "STL-style typed collections for TypeScript, published on npm",
+  role: "Open source · TypeScript, Tsup, Vitest",
+  stack: ["TypeScript", "Tsup", "Vitest", "npm"],
+  liveUrl: { href: "https://www.npmjs.com/package/stl-kit", label: "npmjs.com/package/stl-kit" },
+  takeaway: "The priority-queue demo on the landing page isn't an illustration of stl-kit — it's the mindset that produced it.",
+};
+
+## The gap
+
+JavaScript ships with arrays, maps, and sets — and stops. The moment you need a priority queue or a doubly linked list, you either import a decade-old package with `any` sprinkled through its types, or you write one inline and test it never. Coming from C++'s STL, the absence felt like a missing limb.
+
+stl-kit is my answer: production-grade, STL-style collections — doubly linked lists, priority queues — designed type-first. The generics aren't decoration over untyped internals; the type system is load-bearing, so misuse fails at compile time instead of in production.
+
+## Library engineering is different engineering
+
+An application ships behavior; a library ships a contract. That changes everything: the API surface is designed before the implementation, every public signature is a promise you'll keep for years, and the test suite (Vitest) is less about coverage percentage and more about pinning the contract down so refactors can't quietly bend it.
+
+The build pipeline (Tsup) emits clean ESM and CJS with real type declarations — the unglamorous plumbing that decides whether a library feels professional the moment someone runs npm install.

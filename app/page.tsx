@@ -181,7 +181,7 @@ export default function Page() {
                   pipelines.
                 </p>
                 <div className="mt-4">
-                  <CaseStudyLink slug="sitepins">
+                  <CaseStudyLink slug="sitepins-cms">
                     Read the case study
                   </CaseStudyLink>
                 </div>
@@ -210,7 +210,7 @@ export default function Page() {
                       <MiniSlate />
                     </div>
                     <div className="flex gap-4 text-xs font-semibold">
-                      <CaseStudyLink slug="slate">Case study</CaseStudyLink>
+                      <CaseStudyLink slug="slate-drawing-board">Case study</CaseStudyLink>
                       <ExternalLink href={site.slateUrl}>
                         Launch Slate
                       </ExternalLink>
@@ -240,7 +240,7 @@ export default function Page() {
                       <QueueViz />
                     </div>
                     <div className="flex gap-4 text-xs font-semibold">
-                      <CaseStudyLink slug="stl-kit">Case study</CaseStudyLink>
+                      <CaseStudyLink slug="stl-kit-npm-package">Case study</CaseStudyLink>
                       <ExternalLink href={site.stlKitUrl}>npm</ExternalLink>
                     </div>
                   </div>

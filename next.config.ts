@@ -34,6 +34,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  async redirects() {
+    return [
+      { source: "/case-study/sitepins", destination: "/case-study/sitepins-cms", permanent: true },
+      { source: "/case-study/slate", destination: "/case-study/slate-drawing-board", permanent: true },
+      { source: "/case-study/stl-kit", destination: "/case-study/stl-kit-npm-package", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

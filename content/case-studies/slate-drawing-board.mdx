@@ -1,0 +1,20 @@
+export const meta = {
+  title: "Slate Drawing Board",
+  tagline: "A canvas drawing engine built from scratch, one pointer event at a time",
+  role: "Personal project · React, TypeScript, Canvas API, SVG",
+  stack: ["React", "TypeScript", "Canvas API", "SVG"],
+  liveUrl: { href: "https://slate-drawing-board.vercel.app", label: "slate-drawing-board.vercel.app" },
+  takeaway: "Graphics code is honest code: the frame either made it in 8 milliseconds or it didn't.",
+};
+
+## Why build a drawing app in 2024+
+
+Because nothing else forces you to understand the browser's rendering pipeline as honestly. A drawing app has no ORM to hide behind, no framework abstraction that saves you: it's pointer events arriving faster than frames, a canvas that repaints exactly what you tell it, and a user whose hand notices every dropped millisecond.
+
+Slate is a feature-rich drawing board built from first principles — shapes, freehand ink, selection, the whole surface area — and it exists precisely because I wanted to know what happens under the libraries everyone else imports.
+
+## What the canvas teaches
+
+Event handling at drawing speed is a scheduling problem. Pointer events fire at device rate (often 120Hz+), frames render at display rate, and naive code that draws on every event burns the frame budget doing invisible work. The fix is the pattern every graphics-heavy interface converges on: accumulate input, render once per animation frame, and keep the hot path allocation-free.
+
+Device-pixel-ratio correctness, coordinate-space transforms, hit-testing drawn geometry — these sound like trivia until a line looks blurry on one laptop and crisp on another. The mini drawing surface embedded on this site's landing page is a distilled version of these exact lessons.

@@ -1,0 +1,25 @@
+export const meta = {
+  title: "Sitepins CMS",
+  tagline: "Owning a CMS end-to-end: auth, APIs, and the frontend that sells it",
+  role: "Core engineer · Themefisher · Sep 2025 — present",
+  stack: ["Next.js", "TypeScript", "Node.js", "REST APIs", "RBAC"],
+  takeaway: "Full-stack ownership isn't about knowing two stacks — it's about deleting the seam between them.",
+};
+
+## The shape of the problem
+
+A CMS is a deceptively hard product. It has to feel simple to a content editor, be predictable for a developer, and stay fast while doing both. Sitepins is Themefisher's content platform, used by developers and businesses around the world — and I joined as a core engineer with ownership across the whole vertical slice.
+
+That phrase — vertical slice — matters. I don't hand the API off to a backend team or receive designs I can't question. The same person who writes the React components designs the endpoints they call. That collapses an entire class of integration bugs before they exist: the contract can't drift when one head holds both sides of it.
+
+## Authentication and authority
+
+I own the authentication system: session handling, and role-based access control with granular roles and permissions. RBAC is one of those features that looks like a settings page and behaves like a distributed-systems problem — every UI surface, every API route, and every background service has to agree about what a given user may do, at the same moment, with no exceptions.
+
+The design principle I held onto: authority lives in exactly one place, and everything else derives from it. UI guards are a courtesy; the API is the law. Every permission check the interface performs is re-performed at the boundary, so a clever request can never do what a hidden button couldn't.
+
+## Performance as a habit, not a sprint
+
+The frontend work runs on a simple discipline: measure, then memoize; lazy-load what the first paint doesn't need; treat images as budgets, not decoration. Cross-browser compatibility and semantic HTML aren't a checklist at the end — they're constraints the components are born with.
+
+The result is a codebase where performance work is boring, which is the highest compliment performance work can receive.

@@ -12,19 +12,19 @@ export const sections = [
 
 export const caseStudies = [
   {
-    slug: "sitepins",
+    slug: "sitepins-cms",
     title: "Sitepins CMS",
     tagline: "Owning a CMS end-to-end: auth, APIs, and the frontend that sells it",
     role: "Core engineer · Themefisher · 2025—present",
   },
   {
-    slug: "slate",
+    slug: "slate-drawing-board",
     title: "Slate Drawing Board",
     tagline: "A canvas drawing engine built from scratch, one pointer event at a time",
     role: "Personal project · React, TypeScript, Canvas API",
   },
   {
-    slug: "stl-kit",
+    slug: "stl-kit-npm-package",
     title: "stl-kit",
     tagline: "STL-style typed collections for TypeScript, published on npm",
     role: "Open source · TypeScript, Tsup, Vitest",
