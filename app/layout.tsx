@@ -143,7 +143,8 @@ const personJsonLd = {
   '@type': 'Person',
   name: site.name,
   jobTitle: 'Full-Stack Software Engineer',
-  description: 'Full-stack software engineer specializing in React, Next.js, TypeScript, and Node.js. Building AI-first web applications with MongoDB, PostgreSQL, and Go.',
+  description:
+    'Full-stack software engineer specializing in React, Next.js, TypeScript, and Node.js. Building AI-first web applications with MongoDB, PostgreSQL, and Go.',
   url: site.url,
   email: `mailto:${site.email}`,
   sameAs: [site.github, site.linkedin],

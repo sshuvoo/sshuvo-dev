@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { caseStudies, site, type CaseStudySlug } from "@/lib/site";
 import { getEntry, getSlugs } from "@/lib/mdx";
 import { Reveal } from "@/components/motion/reveal";
+import { BackButton } from "@/components/ui/back-button";
 
 const DIR = "content/case-studies";
 const importer = (slug: string) => import(`@/content/case-studies/${slug}.mdx`);
@@ -81,12 +82,7 @@ export default async function CaseStudyPage({
     <>
       <main id="main" className="mx-auto w-full max-w-3xl flex-1 px-4 pt-32 pb-24 sm:px-6">
         <Reveal>
-          <Link
-            href="/#work"
-            className="inline-flex items-center gap-1.5 font-secondary text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
-          >
-            <ArrowLeft className="size-3.5" aria-hidden /> all work
-          </Link>
+          <BackButton label="all work" />
           <article className="mt-8">
             <header>
               <p className="font-secondary text-sm text-muted-foreground">{cs.role}</p>
