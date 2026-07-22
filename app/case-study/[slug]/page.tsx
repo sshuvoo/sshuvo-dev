@@ -8,7 +8,7 @@ import { getEntry, getSlugs } from "@/lib/mdx";
 import { Reveal } from "@/components/motion/reveal";
 import { BackButton } from "@/components/ui/back-button";
 
-const DIR = "content/case-studies";
+const DIR = "case-studies";
 const importer = (slug: string) => import(`@/content/case-studies/${slug}.mdx`);
 
 export interface CaseStudyMeta {

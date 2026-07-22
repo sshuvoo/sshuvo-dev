@@ -3,7 +3,7 @@ import type { MdxHeading } from "@/lib/mdx";
 
 export type { MdxHeading as JournalHeading };
 
-const DIR = "content/journals";
+const DIR = "journals";
 
 export interface JournalMeta {
   title: string;

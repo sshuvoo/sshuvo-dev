@@ -8,9 +8,14 @@ export interface MdxHeading {
   level: 2 | 3;
 }
 
-export function getSlugs(dir: string): string[] {
+// The `content` root is a static literal so Turbopack can statically scope the
+// filesystem reads to a subfolder. Passing a fully dynamic path into
+// path.join(process.cwd(), ...) makes it trace the whole project into the NFT list.
+const CONTENT_ROOT = "content";
+
+export function getSlugs(collection: string): string[] {
   return fs
-    .readdirSync(path.join(process.cwd(), dir))
+    .readdirSync(path.join(process.cwd(), CONTENT_ROOT, collection))
     .filter((f) => /\.mdx?$/.test(f))
     .map((f) => f.replace(/\.mdx?$/, ""));
 }
@@ -38,9 +43,9 @@ export async function getCollection<T>(
   return entries.filter(Boolean) as (T & { slug: string })[];
 }
 
-export function getSource(dir: string, slug: string): string | null {
+export function getSource(collection: string, slug: string): string | null {
   for (const ext of [".mdx", ".md"]) {
-    const file = path.join(process.cwd(), dir, `${slug}${ext}`);
+    const file = path.join(process.cwd(), CONTENT_ROOT, collection, `${slug}${ext}`);
     if (fs.existsSync(file)) {
       return fs
         .readFileSync(file, "utf8")
