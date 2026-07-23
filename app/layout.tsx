@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  icons: {
+    icon: '/media/app/images/favicon.png',
+    shortcut: '/media/app/images/favicon.png',
+    apple: '/media/app/images/favicon.png',
+  },
   keywords: [
     'Software Engineer',
     'Full-Stack Developer',
