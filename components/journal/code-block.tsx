@@ -3,37 +3,6 @@
 import React, { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
 
-const LANGUAGE_LABELS: Record<string, string> = {
-  bash: 'Terminal',
-  sh: 'Terminal',
-  zsh: 'Terminal',
-  shell: 'Terminal',
-  cmd: 'Terminal',
-  powershell: 'Terminal',
-  go: 'Go',
-  golang: 'Go',
-  ts: 'TypeScript',
-  tsx: 'TypeScript',
-  js: 'JavaScript',
-  jsx: 'JavaScript',
-  javascript: 'JavaScript',
-  typescript: 'TypeScript',
-  py: 'Python',
-  python: 'Python',
-  rust: 'Rust',
-  rs: 'Rust',
-  html: 'HTML',
-  css: 'CSS',
-  json: 'JSON',
-  yaml: 'YAML',
-  yml: 'YAML',
-  toml: 'TOML',
-  sql: 'SQL',
-  md: 'Markdown',
-  mdx: 'MDX',
-  dockerfile: 'Dockerfile',
-}
-
 function extractText(node: React.ReactNode): string {
   if (typeof node === 'string') return node
   if (typeof node === 'number') return String(node)
@@ -59,13 +28,22 @@ export function CodeBlock({
   const [copied, setCopied] = useState(false)
 
   const langKey = dataLanguage?.toLowerCase() || ''
-  const label =
-    LANGUAGE_LABELS[langKey] ||
-    (langKey ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'Code')
+  const label = langKey
+    ? langKey.charAt(0).toUpperCase() + langKey.slice(1)
+    : 'Code'
 
-  const handleCopy = async () => {
-    const rawText = extractText(nodes)
+  const handleCopy = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const figure = e.currentTarget.closest('figure')
+    const codeEl = figure?.querySelector('code') || figure?.querySelector('pre')
+
+    // Get text from DOM element, falling back to VNode extractText if DOM is not ready
+    const rawText = (
+      codeEl?.innerText ||
+      codeEl?.textContent ||
+      extractText(nodes)
+    ).trim()
     if (!rawText) return
+
     try {
       await navigator.clipboard.writeText(rawText)
       setCopied(true)
