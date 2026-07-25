@@ -48,14 +48,13 @@ function extractText(node: React.ReactNode): string {
 export interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {
   'data-language'?: string
   'data-theme'?: string
-  children?: React.ReactNode
+  nodes?: React.ReactNode
 }
 
 export function CodeBlock({
   children,
-  className = '',
+  nodes,
   'data-language': dataLanguage,
-  ...props
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
 
@@ -65,7 +64,7 @@ export function CodeBlock({
     (langKey ? langKey.charAt(0).toUpperCase() + langKey.slice(1) : 'Code')
 
   const handleCopy = async () => {
-    const rawText = extractText(children)
+    const rawText = extractText(nodes)
     if (!rawText) return
     try {
       await navigator.clipboard.writeText(rawText)
@@ -103,14 +102,7 @@ export function CodeBlock({
           )}
         </button>
       </figcaption>
-
-      <pre
-        data-language={dataLanguage}
-        className={`border-border/60 bg-muted/40 overflow-x-auto rounded-lg border p-4 font-mono text-sm leading-relaxed dark:bg-zinc-950/90 [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit ${className}`}
-        {...props}
-      >
-        {children}
-      </pre>
+      {children}
     </figure>
   )
 }
