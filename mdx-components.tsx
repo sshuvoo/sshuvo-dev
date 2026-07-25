@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
+import { CodeBlock } from "@/components/journal/code-block";
 import {
   Callout,
   ExternalRef,
@@ -67,14 +68,7 @@ const components = {
       {children}
     </code>
   ),
-  pre: ({ children, ...props }) => (
-    <pre
-      className="mt-6 overflow-x-auto rounded-xl border border-border bg-muted/40 p-5 font-mono text-sm leading-relaxed dark:bg-zinc-950/80 [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit"
-      {...props}
-    >
-      {children}
-    </pre>
-  ),
+  pre: CodeBlock,
   table: ({ children }) => (
     <div className="mt-6 overflow-x-auto rounded-xl border border-border">
       <table className="w-full text-sm">{children}</table>

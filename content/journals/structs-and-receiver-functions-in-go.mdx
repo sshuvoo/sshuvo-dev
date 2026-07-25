@@ -15,7 +15,7 @@ In most OOP languages, a class acts as a blueprint or constructor, helping us cr
 
 So think of it this way: a struct is the blueprint and constructor that helps us create objects, or instances.
 
-Example:
+## What is a Struct in Go?
 
 ```go
 type Cricketer struct {
@@ -26,7 +26,7 @@ type Cricketer struct {
 }
 ```
 
-Create an instance:
+## Creating Struct Instances
 
 ```go
 // think of this like `new Cricketer()` in other languages, but in Golang we use this syntax
@@ -55,6 +55,8 @@ fmt.Println(lord_shanto.Run)      // 0 - zero value for int
 fmt.Println(lord_shanto.IsBowler) // false - zero value for bool
 ```
 
+## Accessing and Modifying Properties
+
 Accessing and modifying the properties of this instance works exactly like in other programming languages, using the dot (`.`) operator.
 
 ```go
@@ -67,6 +69,8 @@ tamim.IsBowler = true
 fmt.Println(tamim.Name)     // Sakib Al Hasan
 fmt.Println(tamim.IsBowler) // true
 ```
+
+## Value Semantics vs Pointer Semantics
 
 What happens if we assign an instance to another variable? Does it pass by reference, like in JavaScript? Let's check.
 
@@ -94,6 +98,8 @@ fmt.Println(tamim.Name)     // Tamim Iqbal 2.0
 fmt.Println(tamimCopy.Name) // Tamim Iqbal 2.0
 ```
 
+## Receiver Functions: Adding Methods to Structs
+
 You might already be wondering how this can compete with OOP if instances don't have methods, only properties.
 
 Here, I'll introduce you to the receiver function.
@@ -110,6 +116,8 @@ func (c *Cricketer) Introduce() {
 
 tamim.Introduce() // My name is Tamim Iqbal
 ```
+
+## Value Receivers vs Pointer Receivers
 
 One more thing about receiver functions: we can receive the struct either as a reference (pointer) or as a copy (value). So if we want that OOP-like method feel, where a method can actually change the instance's state, we must receive the struct as a pointer, not a value. If you receive it as a value, you're only working with a copy, and any changes you make inside the method won't reflect on the original instance.
 
@@ -131,4 +139,7 @@ tamim.SetNamePtr("Sakib Al Hasan")
 fmt.Println(tamim.Name) // Sakib Al Hasan - changed
 ```
 
+## Why Go Still Isn't OOP
+
 One last thing before you go: throughout this post I compared structs and receiver functions to classes and objects from OOP, just to make the concepts easier to relate to. But Go is not an OOP language. It doesn't have classes, inheritance, or the usual OOP building blocks. Structs with receiver functions just let you achieve some similar patterns, in Go's own way. So don't walk away thinking Go "supports OOP" — it doesn't.
+
