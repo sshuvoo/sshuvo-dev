@@ -221,3 +221,27 @@
     animation: none;
   }
 }
+
+/* ── MDX Syntax Highlighting (Shiki / Rehype-Pretty-Code) ───── */
+
+pre code span[data-line] {
+  display: block;
+  min-height: 1.5rem;
+}
+
+/* Light mode syntax token colors */
+:root:not(.dark) code span[style*='--shiki-light'] {
+  color: var(--shiki-light) !important;
+}
+:root:not(.dark) code span[style*='--shiki-light-bg'] {
+  background-color: var(--shiki-light-bg) !important;
+}
+
+/* Dark mode syntax token colors */
+.dark code span[style*='--shiki-dark'] {
+  color: var(--shiki-dark) !important;
+}
+.dark code span[style*='--shiki-dark-bg'] {
+  background-color: var(--shiki-dark-bg) !important;
+}
+

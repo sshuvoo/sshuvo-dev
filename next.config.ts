@@ -83,7 +83,19 @@ const withMDX = createMDX({
   options: {
     // String form keeps the plugin serializable for Turbopack
     remarkPlugins: ["remark-gfm"],
-    rehypePlugins: ["rehype-slug"],
+    rehypePlugins: [
+      "rehype-slug",
+      [
+        "rehype-pretty-code",
+        {
+          theme: {
+            dark: "github-dark",
+            light: "github-light",
+          },
+          keepBackground: false,
+        },
+      ],
+    ],
   },
 });
 

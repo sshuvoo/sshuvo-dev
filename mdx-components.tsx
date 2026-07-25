@@ -59,13 +59,19 @@ const components = {
       {children}
     </blockquote>
   ),
-  code: ({ children }) => (
-    <code className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">
+  code: ({ children, ...props }) => (
+    <code
+      className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground"
+      {...props}
+    >
       {children}
     </code>
   ),
-  pre: ({ children }) => (
-    <pre className="mt-6 overflow-x-auto rounded-xl border border-border bg-zinc-950 p-5 font-mono text-sm leading-relaxed text-zinc-100 [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">
+  pre: ({ children, ...props }) => (
+    <pre
+      className="mt-6 overflow-x-auto rounded-xl border border-border bg-muted/40 p-5 font-mono text-sm leading-relaxed dark:bg-zinc-950/80 [&_code]:border-0 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit"
+      {...props}
+    >
       {children}
     </pre>
   ),
