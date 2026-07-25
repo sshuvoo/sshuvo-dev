@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -49,6 +50,7 @@ export async function generateMetadata({
       publishedTime: entry.date,
       authors: [site.name],
       tags: [...entry.tags],
+      ...(entry.cover && { images: [{ url: entry.cover, alt: entry.title }] }),
     },
   };
 }
@@ -79,6 +81,7 @@ export default async function JournalEntryPage({
     keywords: entry.tags.join(", "),
     url: `${site.url}/journal/${slug}`,
     author: { "@type": "Person", name: site.name, url: site.url },
+    ...(entry.cover && { image: [entry.cover] }),
   };
 
   return (
@@ -125,6 +128,20 @@ export default async function JournalEntryPage({
                     <AiActions markdown={source} url={entryUrl} title={entry.title} />
                   </div>
                 </header>
+
+                {entry.cover && (
+                  <div className="mt-10 overflow-hidden rounded-xl border border-border">
+                    <Image
+                      src={entry.cover}
+                      alt={`${entry.title} cover`}
+                      width={2932}
+                      height={1666}
+                      priority
+                      sizes="(max-width: 768px) 100vw, 48rem"
+                      className="h-auto w-full"
+                    />
+                  </div>
+                )}
 
                 <div className="mt-6 border-t border-border pt-2">
                   <Content />

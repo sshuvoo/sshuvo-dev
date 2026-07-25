@@ -1,0 +1,134 @@
+export const meta = {
+  title: "Structs in Go: The Closest Thing to OOP You'll Get",
+  description:
+    "Go doesn't have classes, so how do you create objects? This post walks through structs, struct literals, zero values, value vs pointer semantics, and receiver functions — and why Go still isn't OOP.",
+  cover: '/media/journals/images/structs-and-receiver-functions.png',
+  date: '2026-07-25',
+  tags: ['golang', 'go', 'structs', 'oop', 'programming-basics'],
+}
+
+In Golang, "struct" is short for "structure," and it helps us create custom types/structures, which are basically a collection of fields.
+
+In Golang there is no class, so how can we create objects with a constructor?
+
+In most OOP languages, a class acts as a blueprint or constructor, helping us create objects. But Golang doesn't have classes, so we can't create objects with a constructor. Instead, we create objects using a struct.
+
+So think of it this way: a struct is the blueprint and constructor that helps us create objects, or instances.
+
+Example:
+
+```go
+type Cricketer struct {
+	Name     string
+	Age      int
+	Run      int
+	IsBowler bool
+}
+```
+
+Create an instance:
+
+```go
+// think of this like `new Cricketer()` in other languages, but in Golang we use this syntax
+tamim := Cricketer{
+	Name:     "Tamim Iqbal",
+	Age:      38,
+	Run:      15000,
+	IsBowler: false,
+}
+
+// there's also a shorter syntax to create a struct instance (not recommended for production code
+// because it's not readable), it's called a struct literal
+shakib := Cricketer{
+	"Shakib Al Hasan",
+	38,
+	14000,
+	true,
+}
+
+// what if we don't pass any properties at all? Go smartly assigns the default zero value to each property
+lord_shanto := Cricketer{}
+
+fmt.Println(lord_shanto.Name)     // "" - empty string
+fmt.Println(lord_shanto.Age)      // 0 - zero value for int
+fmt.Println(lord_shanto.Run)      // 0 - zero value for int
+fmt.Println(lord_shanto.IsBowler) // false - zero value for bool
+```
+
+Accessing and modifying the properties of this instance works exactly like in other programming languages, using the dot (`.`) operator.
+
+```go
+fmt.Println(tamim.Name)
+fmt.Println(tamim.IsBowler)
+
+tamim.Name = "Sakib Al Hasan" // wait a sec, who are you?
+tamim.IsBowler = true
+
+fmt.Println(tamim.Name)     // Sakib Al Hasan
+fmt.Println(tamim.IsBowler) // true
+```
+
+What happens if we assign an instance to another variable? Does it pass by reference, like in JavaScript? Let's check.
+
+```go
+tamimCopy := tamim
+
+tamimCopy.Name = "Tamim Iqbal 2.0"
+
+fmt.Println(tamim.Name)     // Tamim Iqbal
+fmt.Println(tamimCopy.Name) // Tamim Iqbal 2.0
+```
+
+See, when I change `tamimCopy.Name`, `tamim.Name` doesn't change. This means a struct is passed by value, not by reference.
+
+In other words, it creates a new copy.
+
+So, can we make it pass by reference? Of course we can, using a pointer.
+
+```go
+tamimCopy := &tamim
+
+tamimCopy.Name = "Tamim Iqbal 2.0"
+
+fmt.Println(tamim.Name)     // Tamim Iqbal 2.0
+fmt.Println(tamimCopy.Name) // Tamim Iqbal 2.0
+```
+
+You might already be wondering how this can compete with OOP if instances don't have methods, only properties.
+
+Here, I'll introduce you to the receiver function.
+
+A receiver function is a function that's attached, or bound, to a struct.
+
+```go
+func (c *Cricketer) Introduce() {
+	fmt.Println("My name is", c.Name)
+}
+
+// now this is a method of the Cricketer struct.
+// you can't use this method standalone, you have to use it with a struct instance.
+
+tamim.Introduce() // My name is Tamim Iqbal
+```
+
+One more thing about receiver functions: we can receive the struct either as a reference (pointer) or as a copy (value). So if we want that OOP-like method feel, where a method can actually change the instance's state, we must receive the struct as a pointer, not a value. If you receive it as a value, you're only working with a copy, and any changes you make inside the method won't reflect on the original instance.
+
+```go
+// value receiver - works on a copy, changes don't stick
+func (c Cricketer) SetName(name string) {
+	c.Name = name
+}
+
+// pointer receiver - works on the original, changes stick
+func (c *Cricketer) SetNamePtr(name string) {
+	c.Name = name
+}
+
+tamim.SetName("Sakib Al Hasan")
+fmt.Println(tamim.Name) // Tamim Iqbal - unchanged
+
+tamim.SetNamePtr("Sakib Al Hasan")
+fmt.Println(tamim.Name) // Sakib Al Hasan - changed
+```
+
+One last thing before you go: throughout this post I compared structs and receiver functions to classes and objects from OOP, just to make the concepts easier to relate to. But Go is not an OOP language. It doesn't have classes, inheritance, or the usual OOP building blocks. Structs with receiver functions just let you achieve some similar patterns, in Go's own way. So don't walk away thinking Go "supports OOP" — it doesn't.

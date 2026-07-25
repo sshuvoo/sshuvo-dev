@@ -10,6 +10,7 @@ export interface JournalMeta {
   description: string;
   date: string;
   tags: string[];
+  cover?: string;
 }
 
 export interface JournalEntry extends JournalMeta {
